@@ -1,0 +1,8 @@
+E:\Cá nhân\BTLWeb\BEViettel\BEViettel\obj\Debug\net8.0\BEViettel.csproj.AssemblyReference.cache
+E:\Cá nhân\BTLWeb\BEViettel\BEViettel\obj\Debug\net8.0\rpswa.dswa.cache.json
+E:\Cá nhân\BTLWeb\BEViettel\BEViettel\obj\Debug\net8.0\BEViettel.GeneratedMSBuildEditorConfig.editorconfig
+E:\Cá nhân\BTLWeb\BEViettel\BEViettel\obj\Debug\net8.0\BEViettel.AssemblyInfoInputs.cache
+E:\Cá nhân\BTLWeb\BEViettel\BEViettel\obj\Debug\net8.0\BEViettel.AssemblyInfo.cs
+E:\Cá nhân\BTLWeb\BEViettel\BEViettel\obj\Debug\net8.0\BEViettel.csproj.CoreCompileInputs.cache
+E:\Cá nhân\BTLWeb\BEViettel\BEViettel\obj\Debug\net8.0\BEViettel.MvcApplicationPartsAssemblyInfo.cs
+E:\Cá nhân\BTLWeb\BEViettel\BEViettel\obj\Debug\net8.0\BEViettel.MvcApplicationPartsAssemblyInfo.cache

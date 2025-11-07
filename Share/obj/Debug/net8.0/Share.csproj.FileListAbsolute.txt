@@ -1,0 +1,12 @@
+E:\Cá nhân\BTLWeb\BEViettel\Share\bin\Debug\net8.0\Share.deps.json
+E:\Cá nhân\BTLWeb\BEViettel\Share\bin\Debug\net8.0\Share.dll
+E:\Cá nhân\BTLWeb\BEViettel\Share\bin\Debug\net8.0\Share.pdb
+E:\Cá nhân\BTLWeb\BEViettel\Share\obj\Debug\net8.0\Share.GeneratedMSBuildEditorConfig.editorconfig
+E:\Cá nhân\BTLWeb\BEViettel\Share\obj\Debug\net8.0\Share.AssemblyInfoInputs.cache
+E:\Cá nhân\BTLWeb\BEViettel\Share\obj\Debug\net8.0\Share.AssemblyInfo.cs
+E:\Cá nhân\BTLWeb\BEViettel\Share\obj\Debug\net8.0\Share.csproj.CoreCompileInputs.cache
+E:\Cá nhân\BTLWeb\BEViettel\Share\obj\Debug\net8.0\Share.dll
+E:\Cá nhân\BTLWeb\BEViettel\Share\obj\Debug\net8.0\refint\Share.dll
+E:\Cá nhân\BTLWeb\BEViettel\Share\obj\Debug\net8.0\Share.pdb
+E:\Cá nhân\BTLWeb\BEViettel\Share\obj\Debug\net8.0\ref\Share.dll
+E:\Cá nhân\BTLWeb\BEViettel\Share\obj\Debug\net8.0\Share.sourcelink.json

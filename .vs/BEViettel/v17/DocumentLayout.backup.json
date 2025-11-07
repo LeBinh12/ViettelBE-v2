@@ -1,0 +1,394 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{81A08ADC-BBCB-497C-B0B1-2A063984F97C}|WebAPI\\WebAPI.csproj|e:\\c\u00E1 nh\u00E2n\\btlweb\\beviettel\\webapi\\webapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{81A08ADC-BBCB-497C-B0B1-2A063984F97C}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\webapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81A08ADC-BBCB-497C-B0B1-2A063984F97C}|WebAPI\\WebAPI.csproj|e:\\c\u00E1 nh\u00E2n\\btlweb\\beviettel\\webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{81A08ADC-BBCB-497C-B0B1-2A063984F97C}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81A08ADC-BBCB-497C-B0B1-2A063984F97C}|WebAPI\\WebAPI.csproj|e:\\c\u00E1 nh\u00E2n\\btlweb\\beviettel\\webapi\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{81A08ADC-BBCB-497C-B0B1-2A063984F97C}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71CA7190-95D7-449A-BDA6-63C36B00FCA7}|Infrastructure\\Infrastructure.csproj|e:\\c\u00E1 nh\u00E2n\\btlweb\\beviettel\\infrastructure\\applicationdbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{71CA7190-95D7-449A-BDA6-63C36B00FCA7}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\applicationdbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71CA7190-95D7-449A-BDA6-63C36B00FCA7}|Infrastructure\\Infrastructure.csproj|e:\\c\u00E1 nh\u00E2n\\btlweb\\beviettel\\infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{71CA7190-95D7-449A-BDA6-63C36B00FCA7}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81A08ADC-BBCB-497C-B0B1-2A063984F97C}|WebAPI\\WebAPI.csproj|e:\\c\u00E1 nh\u00E2n\\btlweb\\beviettel\\webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{81A08ADC-BBCB-497C-B0B1-2A063984F97C}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71CA7190-95D7-449A-BDA6-63C36B00FCA7}|Infrastructure\\Infrastructure.csproj|e:\\c\u00E1 nh\u00E2n\\btlweb\\beviettel\\infrastructure\\infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{71CA7190-95D7-449A-BDA6-63C36B00FCA7}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{586B2743-AAD9-4F4A-A533-931A36D8F0FB}|Domain\\Domain.csproj|e:\\c\u00E1 nh\u00E2n\\btlweb\\beviettel\\domain\\entities\\useraccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{586B2743-AAD9-4F4A-A533-931A36D8F0FB}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\useraccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{586B2743-AAD9-4F4A-A533-931A36D8F0FB}|Domain\\Domain.csproj|e:\\c\u00E1 nh\u00E2n\\btlweb\\beviettel\\domain\\entities\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{586B2743-AAD9-4F4A-A533-931A36D8F0FB}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{586B2743-AAD9-4F4A-A533-931A36D8F0FB}|Domain\\Domain.csproj|e:\\c\u00E1 nh\u00E2n\\btlweb\\beviettel\\domain\\entities\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{586B2743-AAD9-4F4A-A533-931A36D8F0FB}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{586B2743-AAD9-4F4A-A533-931A36D8F0FB}|Domain\\Domain.csproj|e:\\c\u00E1 nh\u00E2n\\btlweb\\beviettel\\domain\\entities\\blockchainledger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{586B2743-AAD9-4F4A-A533-931A36D8F0FB}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\blockchainledger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{586B2743-AAD9-4F4A-A533-931A36D8F0FB}|Domain\\Domain.csproj|e:\\c\u00E1 nh\u00E2n\\btlweb\\beviettel\\domain\\entities\\servicepackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{586B2743-AAD9-4F4A-A533-931A36D8F0FB}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\servicepackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{586B2743-AAD9-4F4A-A533-931A36D8F0FB}|Domain\\Domain.csproj|e:\\c\u00E1 nh\u00E2n\\btlweb\\beviettel\\domain\\enums\\invoicestatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{586B2743-AAD9-4F4A-A533-931A36D8F0FB}|Domain\\Domain.csproj|solutionrelative:domain\\enums\\invoicestatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{586B2743-AAD9-4F4A-A533-931A36D8F0FB}|Domain\\Domain.csproj|e:\\c\u00E1 nh\u00E2n\\btlweb\\beviettel\\domain\\common\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{586B2743-AAD9-4F4A-A533-931A36D8F0FB}|Domain\\Domain.csproj|solutionrelative:domain\\common\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{586B2743-AAD9-4F4A-A533-931A36D8F0FB}|Domain\\Domain.csproj|e:\\c\u00E1 nh\u00E2n\\btlweb\\beviettel\\domain\\common\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{586B2743-AAD9-4F4A-A533-931A36D8F0FB}|Domain\\Domain.csproj|solutionrelative:domain\\common\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{586B2743-AAD9-4F4A-A533-931A36D8F0FB}|Domain\\Domain.csproj|e:\\c\u00E1 nh\u00E2n\\btlweb\\beviettel\\domain\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{586B2743-AAD9-4F4A-A533-931A36D8F0FB}|Domain\\Domain.csproj|solutionrelative:domain\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{586B2743-AAD9-4F4A-A533-931A36D8F0FB}|Domain\\Domain.csproj|e:\\c\u00E1 nh\u00E2n\\btlweb\\beviettel\\domain\\common\\baseidentityuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{586B2743-AAD9-4F4A-A533-931A36D8F0FB}|Domain\\Domain.csproj|solutionrelative:domain\\common\\baseidentityuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE7F0024-258F-4EAE-9011-02E07EB7D34B}|Share\\Share.csproj|e:\\c\u00E1 nh\u00E2n\\btlweb\\beviettel\\share\\result.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE7F0024-258F-4EAE-9011-02E07EB7D34B}|Share\\Share.csproj|solutionrelative:share\\result.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE7F0024-258F-4EAE-9011-02E07EB7D34B}|Share\\Share.csproj|e:\\c\u00E1 nh\u00E2n\\btlweb\\beviettel\\share\\interfaces\\iresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE7F0024-258F-4EAE-9011-02E07EB7D34B}|Share\\Share.csproj|solutionrelative:share\\interfaces\\iresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4843C377-3C62-421D-98D1-630732C00682}|Application\\Application.csproj|e:\\c\u00E1 nh\u00E2n\\btlweb\\beviettel\\application\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4843C377-3C62-421D-98D1-630732C00682}|Application\\Application.csproj|solutionrelative:application\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 739,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{74946827-37a0-11d2-a273-00c04f8ef4ff}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "WeatherForecast.cs",
+              "DocumentMoniker": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\WebAPI\\WeatherForecast.cs",
+              "RelativeDocumentMoniker": "WebAPI\\WeatherForecast.cs",
+              "ToolTip": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\WebAPI\\WeatherForecast.cs",
+              "RelativeToolTip": "WebAPI\\WeatherForecast.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T16:20:22.584Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "WebAPI.csproj",
+              "DocumentMoniker": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\WebAPI\\WebAPI.csproj",
+              "RelativeDocumentMoniker": "WebAPI\\WebAPI.csproj",
+              "ToolTip": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\WebAPI\\WebAPI.csproj",
+              "RelativeToolTip": "WebAPI\\WebAPI.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-01T16:00:54.093Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\WebAPI\\Program.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Program.cs",
+              "ToolTip": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\WebAPI\\Program.cs",
+              "RelativeToolTip": "WebAPI\\Program.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAgwBAAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T15:59:32.286Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Infrastructure\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Infrastructure\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "Infrastructure\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAgwDwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T14:55:18.863Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ApplicationDbContextFactory.cs",
+              "DocumentMoniker": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Infrastructure\\ApplicationDbContextFactory.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\ApplicationDbContextFactory.cs",
+              "ToolTip": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Infrastructure\\ApplicationDbContextFactory.cs",
+              "RelativeToolTip": "Infrastructure\\ApplicationDbContextFactory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T16:09:51.856Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\WebAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "WebAPI\\appsettings.json",
+              "ToolTip": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\WebAPI\\appsettings.json",
+              "RelativeToolTip": "WebAPI\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-01T16:13:36.015Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Infrastructure.csproj",
+              "DocumentMoniker": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Infrastructure\\Infrastructure.csproj",
+              "RelativeDocumentMoniker": "Infrastructure\\Infrastructure.csproj",
+              "ToolTip": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Infrastructure\\Infrastructure.csproj",
+              "RelativeToolTip": "Infrastructure\\Infrastructure.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-01T15:35:44.917Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UserAccount.cs",
+              "DocumentMoniker": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Domain\\Entities\\UserAccount.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\UserAccount.cs",
+              "ToolTip": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Domain\\Entities\\UserAccount.cs",
+              "RelativeToolTip": "Domain\\Entities\\UserAccount.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T15:00:47.45Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Invoice.cs",
+              "DocumentMoniker": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Domain\\Entities\\Invoice.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\Invoice.cs",
+              "ToolTip": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Domain\\Entities\\Invoice.cs",
+              "RelativeToolTip": "Domain\\Entities\\Invoice.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBJwA4AAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T14:44:18.874Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Customer.cs",
+              "DocumentMoniker": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Domain\\Entities\\Customer.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\Customer.cs",
+              "ToolTip": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Domain\\Entities\\Customer.cs",
+              "RelativeToolTip": "Domain\\Entities\\Customer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T14:37:49.1Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "BlockchainLedger.cs",
+              "DocumentMoniker": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Domain\\Entities\\BlockchainLedger.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\BlockchainLedger.cs",
+              "ToolTip": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Domain\\Entities\\BlockchainLedger.cs",
+              "RelativeToolTip": "Domain\\Entities\\BlockchainLedger.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T14:51:40.213Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ServicePackage.cs",
+              "DocumentMoniker": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Domain\\Entities\\ServicePackage.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\ServicePackage.cs",
+              "ToolTip": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Domain\\Entities\\ServicePackage.cs",
+              "RelativeToolTip": "Domain\\Entities\\ServicePackage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T14:40:35.72Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "InvoiceStatus.cs",
+              "DocumentMoniker": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Domain\\Enums\\InvoiceStatus.cs",
+              "RelativeDocumentMoniker": "Domain\\Enums\\InvoiceStatus.cs",
+              "ToolTip": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Domain\\Enums\\InvoiceStatus.cs",
+              "RelativeToolTip": "Domain\\Enums\\InvoiceStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T14:50:41.08Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "BaseIdentityUser.cs",
+              "DocumentMoniker": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Domain\\Common\\BaseIdentityUser.cs",
+              "RelativeDocumentMoniker": "Domain\\Common\\BaseIdentityUser.cs",
+              "ToolTip": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Domain\\Common\\BaseIdentityUser.cs",
+              "RelativeToolTip": "Domain\\Common\\BaseIdentityUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T14:34:08.083Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "BaseEntity.cs",
+              "DocumentMoniker": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Domain\\Common\\BaseEntity.cs",
+              "RelativeDocumentMoniker": "Domain\\Common\\BaseEntity.cs",
+              "ToolTip": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Domain\\Common\\BaseEntity.cs",
+              "RelativeToolTip": "Domain\\Common\\BaseEntity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T14:32:44.16Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Entity.cs",
+              "DocumentMoniker": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Domain\\Common\\Entity.cs",
+              "RelativeDocumentMoniker": "Domain\\Common\\Entity.cs",
+              "ToolTip": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Domain\\Common\\Entity.cs",
+              "RelativeToolTip": "Domain\\Common\\Entity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T14:32:07.92Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "IResult.cs",
+              "DocumentMoniker": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Share\\Interfaces\\IResult.cs",
+              "RelativeDocumentMoniker": "Share\\Interfaces\\IResult.cs",
+              "ToolTip": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Share\\Interfaces\\IResult.cs",
+              "RelativeToolTip": "Share\\Interfaces\\IResult.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAQwBYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T14:26:38.293Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Domain\\Program.cs",
+              "RelativeDocumentMoniker": "Domain\\Program.cs",
+              "ToolTip": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Domain\\Program.cs",
+              "RelativeToolTip": "Domain\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T14:15:47.076Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Result.cs",
+              "DocumentMoniker": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Share\\Result.cs",
+              "RelativeDocumentMoniker": "Share\\Result.cs",
+              "ToolTip": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Share\\Result.cs",
+              "RelativeToolTip": "Share\\Result.cs",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAiwA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T14:16:29.392Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Application\\Program.cs",
+              "RelativeDocumentMoniker": "Application\\Program.cs",
+              "ToolTip": "E:\\C\u00E1 nh\u00E2n\\BTLWeb\\BEViettel\\Application\\Program.cs",
+              "RelativeToolTip": "Application\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T14:15:08.881Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedHeight": 662,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

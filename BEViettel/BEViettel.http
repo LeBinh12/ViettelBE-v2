@@ -1,0 +1,6 @@
+@BEViettel_HostAddress = http://localhost:5177
+
+GET {{BEViettel_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

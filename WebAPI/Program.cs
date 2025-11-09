@@ -53,11 +53,17 @@ builder.Services.AddControllers()
 builder.Services.AddScoped<IUserService, UserAccountService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-builder.Services.AddScoped<Application.Interfaces.ICustomerRepository, Infrastructure.Repositories.CustomerRepository>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 
-builder.Services.AddScoped<CustomerService>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
 
-
+builder.Services.AddScoped<IUserService, UserAccountService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IInvoiceService, InvoiceService>();
+builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+builder.Services.AddScoped<IPaymentGateway, PaymentGatewayService>();
+builder.Services.AddScoped<IInvoiceRequestService, InvoiceRequestService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 
 

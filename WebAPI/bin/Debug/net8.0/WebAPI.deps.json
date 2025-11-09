@@ -9,6 +9,7 @@
       "WebAPI/1.0.0": {
         "dependencies": {
           "Application": "1.0.0",
+          "Domain": "1.0.0",
           "Infrastructure": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.18",
           "Microsoft.AspNetCore.OpenApi": "8.0.18",
@@ -1402,6 +1403,7 @@
       },
       "Infrastructure/1.0.0": {
         "dependencies": {
+          "Application": "1.0.0",
           "Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "8.0.18",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.11"

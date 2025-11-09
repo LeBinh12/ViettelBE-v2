@@ -17,14 +17,14 @@ namespace Infrastructure.Repositories
         public async Task<List<Customer>> GetAllAsync()
         {
             return await _context.Customers
-                .Where(c => !c.IsDelete)
+                .Where(c => !c.isDeleted)
                 .ToListAsync();
         }
 
         public async Task<Customer?> GetByEmailAsync(string email)
         {
             return await _context.Customers
-                .FirstOrDefaultAsync(c => c.Email == email && !c.IsDelete);
+                .FirstOrDefaultAsync(c => c.Email == email && !c.isDeleted);
         }
 
         public async Task<Customer?> GetByIdAsync(Guid id)
@@ -49,7 +49,7 @@ namespace Infrastructure.Repositories
             var customer = await _context.Customers.FindAsync(id);
             if (customer != null)
             {
-                customer.IsDelete = true;
+                customer.isDeleted = true;
                 await _context.SaveChangesAsync();
             }
         }

@@ -19,3 +19,10 @@ E:\Cá nhân\BTLWeb\BEViettel\Infrastructure\obj\Debug\net8.0\Infrastructure.pdb
 E:\Cá nhân\BTLWeb\BEViettel\Infrastructure\obj\Debug\net8.0\Infrastructure.genruntimeconfig.cache
 E:\Cá nhân\BTLWeb\BEViettel\Infrastructure\obj\Debug\net8.0\ref\Infrastructure.dll
 E:\Cá nhân\BTLWeb\BEViettel\Infrastructure\obj\Debug\net8.0\Infrastructure.sourcelink.json
+E:\Cá nhân\BTLWeb\BEViettel\Infrastructure\bin\Debug\net8.0\Application.deps.json
+E:\Cá nhân\BTLWeb\BEViettel\Infrastructure\bin\Debug\net8.0\Application.runtimeconfig.json
+E:\Cá nhân\BTLWeb\BEViettel\Infrastructure\bin\Debug\net8.0\Application.exe
+E:\Cá nhân\BTLWeb\BEViettel\Infrastructure\bin\Debug\net8.0\Application.dll
+E:\Cá nhân\BTLWeb\BEViettel\Infrastructure\bin\Debug\net8.0\Share.dll
+E:\Cá nhân\BTLWeb\BEViettel\Infrastructure\bin\Debug\net8.0\Application.pdb
+E:\Cá nhân\BTLWeb\BEViettel\Infrastructure\bin\Debug\net8.0\Share.pdb

@@ -1,10 +1,12 @@
-﻿using Domain.Entities;
+﻿using Application.DTOs;
 using Application.Interfaces;
+using Domain.Entities;
 using System.Text.RegularExpressions;
+using Share;
 
 namespace Application.Services
 {
-    public class CustomerService
+    public class CustomerService : ICustomerService
     {
         private readonly ICustomerRepository _repo;
 
@@ -13,107 +15,118 @@ namespace Application.Services
             _repo = repo;
         }
 
-        //  Kiểm tra định dạng email hợp lệ
         private bool IsEmailFormatValid(string email)
         {
-            if (string.IsNullOrWhiteSpace(email))
-                return false;
-
+            if (string.IsNullOrWhiteSpace(email)) return false;
             var regex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
             return regex.IsMatch(email);
         }
 
-        //  Kiểm tra email hợp lệ và chưa tồn tại
-        public async Task<bool> IsEmailValidAsync(string email)
+        public async Task<Result<List<CustomerDTO.CustomerResponseDto>>> GetAllAsync()
         {
-            if (!IsEmailFormatValid(email))
-                return false;
+            var customers = await _repo.GetAllAsync();
+            var result = customers.Select(c => new CustomerDTO.CustomerResponseDto
+            {
+                Id = c.Id,
+                FullName = c.FullName,
+                Email = c.Email,
+                Phone = c.Phone,
+                Address = c.Address,
+                CreatedAt = c.CreatedAt,
+            }).ToList();
 
-            var existing = await _repo.GetByEmailAsync(email);
-            return existing == null;
+            return Result<List<CustomerDTO.CustomerResponseDto>>.Success(result,"Lấy danh saách người dùng thành công");
         }
 
-        //  Lấy toàn bộ khách hàng
-        public async Task<List<Customer>> GetAllAsync() => await _repo.GetAllAsync();
-
-        //  Thêm khách hàng mới
-        public async Task AddAsync(Customer customer)
+        public async Task<Result<CustomerDTO.CustomerResponseDto>> AddAsync(CustomerDTO.CustomerRequestDto dto)
         {
-            // 1️ Kiểm tra định dạng email
-            if (!IsEmailFormatValid(customer.Email))
-                throw new Exception("❌ Email không hợp lệ. Vui lòng nhập đúng định dạng.");
+            if (!IsEmailFormatValid(dto.Email))
+                return Result<CustomerDTO.CustomerResponseDto>.Failure("Email không hợp lệ.");
 
-            // 2️ Kiểm tra email đã tồn tại chưa
-            var existing = await _repo.GetByEmailAsync(customer.Email);
-            if (existing != null)
-                throw new Exception("❌ Email đã tồn tại trong hệ thống.");
+            var exists = await _repo.GetByEmailAsync(dto.Email);
+            if (exists != null)
+                return Result<CustomerDTO.CustomerResponseDto>.Failure("Email đã tồn tại trong hệ thống.");
 
-            // 3️ Thiết lập thông tin mặc định
-            customer.Id = Guid.NewGuid();
-            customer.CreateDate = DateTime.UtcNow;
-            customer.UpdateDate = DateTime.UtcNow;
-            customer.IsDelete = false;
+            var customer = new Customer
+            {
+                Id = Guid.NewGuid(),
+                FullName = dto.FullName,
+                Email = dto.Email,
+                Phone = dto.Phone,
+                Address = dto.Address,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+                isDeleted = false
+            };
 
-            // 4️ Lưu
             await _repo.AddAsync(customer);
+
+            var response = new CustomerDTO.CustomerResponseDto
+            {
+                Id = customer.Id,
+                FullName = customer.FullName,
+                Email = customer.Email,
+                Phone = customer.Phone,
+                Address = customer.Address,
+            };
+
+            return Result<CustomerDTO.CustomerResponseDto>.Success(response, "Thêm khách hàng thành công.");
         }
 
-        //  Cập nhật khách hàng
-        public async Task UpdateAsync(Customer customer)
+        public async Task<Result<CustomerDTO.CustomerResponseDto>> UpdateAsync(Guid id, CustomerDTO.CustomerRequestDto dto)
         {
-            var existing = await _repo.GetByIdAsync(customer.Id);
-            if (existing == null)
-                throw new Exception("❌ Không tìm thấy khách hàng.");
+            var customer = await _repo.GetByIdAsync(id);
+            if (customer == null)
+                return Result<CustomerDTO.CustomerResponseDto>.Failure("Không tìm thấy khách hàng.");
 
-            // 1️ Kiểm tra định dạng email
-            if (!IsEmailFormatValid(customer.Email))
-                throw new Exception("❌ Email không hợp lệ.");
+            if (!IsEmailFormatValid(dto.Email))
+                return Result<CustomerDTO.CustomerResponseDto>.Failure("Email không hợp lệ.");
 
-            // 2️ Kiểm tra email trùng (trừ chính mình)
-            var duplicate = await _repo.GetByEmailAsync(customer.Email);
-            if (duplicate != null && duplicate.Id != customer.Id)
-                throw new Exception("❌ Email đã được sử dụng bởi khách hàng khác.");
+            var duplicate = await _repo.GetByEmailAsync(dto.Email);
+            if (duplicate != null && duplicate.Id != id)
+                return Result<CustomerDTO.CustomerResponseDto>.Failure("Email đã được sử dụng bởi khách hàng khác.");
 
-            // 3️ Cập nhật thông tin
-            existing.FullName = customer.FullName;
-            existing.Email = customer.Email;
-            existing.Phone = customer.Phone;
-            existing.Address = customer.Address;
-            existing.UpdateDate = DateTime.UtcNow;
+            customer.FullName = dto.FullName;
+            customer.Email = dto.Email;
+            customer.Phone = dto.Phone;
+            customer.Address = dto.Address;
+            customer.UpdatedAt = DateTime.UtcNow;
 
-            await _repo.UpdateAsync(existing);
+            await _repo.UpdateAsync(customer);
+
+            var response = new CustomerDTO.CustomerResponseDto
+            {
+                Id = customer.Id,
+                FullName = customer.FullName,
+                Email = customer.Email,
+                Phone = customer.Phone,
+                Address = customer.Address,
+                CreatedAt = customer.CreatedAt,
+            };
+
+            return Result<CustomerDTO.CustomerResponseDto>.Success(response, "Cập nhật khách hàng thành công.");
         }
 
-        //  Xóa khách hàng (soft delete)
-        public async Task DeleteAsync(Guid id)
+        public async Task<Result<bool>> DeleteAsync(Guid id)
         {
-            var existing = await _repo.GetByIdAsync(id);
-            if (existing == null)
-                throw new Exception("❌ Không tìm thấy khách hàng để xóa.");
+            var customer = await _repo.GetByIdAsync(id);
+            if (customer == null)
+                return Result<bool>.Failure("Không tìm thấy khách hàng để xóa.");
 
-            existing.IsDelete = true;
-            existing.UpdateDate = DateTime.UtcNow;
-            await _repo.UpdateAsync(existing);
+            customer.isDeleted = true;
+            customer.UpdatedAt = DateTime.UtcNow;
+            await _repo.UpdateAsync(customer);
+
+            return Result<bool>.Success(true, "Xóa khách hàng thành công.");
         }
 
-        //  Kiểm tra email đã tồn tại (cho controller dùng check-email)
-        public async Task<bool> EmailExistsAsync(string email)
+        public async Task<Result<bool>> IsEmailValidAsync(string email)
         {
             if (!IsEmailFormatValid(email))
-                return false;
+                return Result<bool>.Failure("Email không hợp lệ.");
 
-            var existing = await _repo.GetByEmailAsync(email);
-            return existing != null;
-        }
-
-        //  Kiểm tra email tồn tại cho người khác (dùng cho PUT)
-        public async Task<bool> EmailExistsForOtherAsync(string email, Guid id)
-        {
-            if (!IsEmailFormatValid(email))
-                return false;
-
-            var existing = await _repo.GetByEmailAsync(email);
-            return existing != null && existing.Id != id;
+            var exists = await _repo.GetByEmailAsync(email);
+            return Result<bool>.Success(exists == null, exists == null ? "Email hợp lệ." : "Email đã tồn tại.");
         }
     }
 }

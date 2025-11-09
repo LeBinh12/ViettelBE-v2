@@ -249,6 +249,9 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
+              "E:\\Cá nhân\\BTLWeb\\BEViettel\\Application\\Application.csproj": {
+                "projectPath": "E:\\Cá nhân\\BTLWeb\\BEViettel\\Application\\Application.csproj"
+              },
               "E:\\Cá nhân\\BTLWeb\\BEViettel\\Domain\\Domain.csproj": {
                 "projectPath": "E:\\Cá nhân\\BTLWeb\\BEViettel\\Domain\\Domain.csproj"
               }
@@ -443,6 +446,9 @@
             "projectReferences": {
               "E:\\Cá nhân\\BTLWeb\\BEViettel\\Application\\Application.csproj": {
                 "projectPath": "E:\\Cá nhân\\BTLWeb\\BEViettel\\Application\\Application.csproj"
+              },
+              "E:\\Cá nhân\\BTLWeb\\BEViettel\\Domain\\Domain.csproj": {
+                "projectPath": "E:\\Cá nhân\\BTLWeb\\BEViettel\\Domain\\Domain.csproj"
               },
               "E:\\Cá nhân\\BTLWeb\\BEViettel\\Infrastructure\\Infrastructure.csproj": {
                 "projectPath": "E:\\Cá nhân\\BTLWeb\\BEViettel\\Infrastructure\\Infrastructure.csproj"

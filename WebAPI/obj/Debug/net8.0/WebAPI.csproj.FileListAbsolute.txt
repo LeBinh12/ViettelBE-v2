@@ -162,3 +162,4 @@ E:\Cá nhân\BTLWeb\BEViettel\WebAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Authe
 E:\Cá nhân\BTLWeb\BEViettel\WebAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
 E:\Cá nhân\BTLWeb\BEViettel\WebAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 E:\Cá nhân\BTLWeb\BEViettel\WebAPI\obj\Debug\net8.0\WebAPI.sourcelink.json
+E:\Cá nhân\BTLWeb\BEViettel\WebAPI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

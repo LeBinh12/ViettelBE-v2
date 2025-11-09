@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using Application.Interfaces;
 using Application.Services;
 using Domain.Abstractions;
@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using WebAPIDocker.Middlewares;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,7 +32,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
         policy => policy
-            .WithOrigins("http://localhost:5175","http://localhost:5173") // domain frontend
+            .WithOrigins("http://localhost:5175", "http://localhost:5173") // domain frontend
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials()
@@ -45,12 +46,18 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
-        options.JsonSerializerOptions.ReferenceHandler = 
+        options.JsonSerializerOptions.ReferenceHandler =
             System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
     });
 
 builder.Services.AddScoped<IUserService, UserAccountService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddScoped<Application.Interfaces.ICustomerRepository, Infrastructure.Repositories.CustomerRepository>();
+
+builder.Services.AddScoped<CustomerService>();
+
+
 
 
 

@@ -1,0 +1,46 @@
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+[Ll]ogs/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.pidb
+*.userprefs
+
+# Build Results
+[Oo]bj/
+[Bb]in/
+[Bb]uild/
+
+# Store app-specific data in the AppData folder, roaming settings per machine
+%USERPROFILE%\.nuget\packages\*
+
+# NuGet v3 cache
+packages\repositories.lock
+!packages/build/
+!packages/repositories.config
+
+# Enable "build/" folder mode in VS
+build/
+!build/*/
+!build/*.*
+!build/*.md
+
+# Packages
+*.nupkg
+# NuGet Symbol Packages
+*.snupkg
+
+# JetBrains Rider
+.idea/
+*.sln.iml

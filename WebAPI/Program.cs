@@ -64,7 +64,8 @@ builder.Services.AddScoped<IInvoiceRequestService, InvoiceRequestService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-
+builder.Services.AddScoped<IServicePackageService, ServicePackageService>();
+builder.Services.AddScoped<IServicePackageRepository, ServicePackageRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

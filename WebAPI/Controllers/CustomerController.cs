@@ -15,28 +15,28 @@ namespace WebAPI.Controllers
             _service = service;
         }
 
-        [HttpGet]
+        [HttpGet("get-all")]
         public async Task<IActionResult> GetAll()
         {
             var result = await _service.GetAllAsync();
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] CustomerDTO.CustomerRequestDto dto)
         {
             var result = await _service.AddAsync(dto);
             return result.Succeeded ? Ok(result) : BadRequest(result);
         }
 
-        [HttpPost("{id}")]
+        [HttpPost("update/{id}")]
         public async Task<IActionResult> Update(Guid id, [FromBody] CustomerDTO.CustomerRequestDto dto)
         {
             var result = await _service.UpdateAsync(id, dto);
             return result.Succeeded ? Ok(result) : BadRequest(result);
         }
 
-        [HttpPost("{id}")]
+        [HttpPost("delete/{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var result = await _service.DeleteAsync(id);

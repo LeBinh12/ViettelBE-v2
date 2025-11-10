@@ -13,6 +13,19 @@ namespace Application.Services
         private readonly IServicePackageRepository _repository;
         private readonly ICategoryRepository _categoryRepository;
 
+        private ServicePackageResponse MapToResponse(ServicePackage package)
+        {
+            return new ServicePackageResponse
+            {
+                Id = package.Id,
+                PackageName = package.PackageName,
+                Price = package.Price,
+                Description = package.Description,
+                DurationMonths = package.DurationMonths,
+                CategoryName = package.Category?.Name ?? string.Empty
+            };
+        }
+
         public ServicePackageService(IServicePackageRepository repository, ICategoryRepository categoryRepository)
         {
             _repository = repository;
@@ -23,14 +36,7 @@ namespace Application.Services
         {
             var packages = await _repository.GetAllAsync();
 
-            var response = packages.Select(p => new ServicePackageResponse
-            {
-                Id = p.Id,
-                PackageName = p.PackageName,
-                Price = p.Price,
-                Description = p.Description,
-                DurationMonths = p.DurationMonths
-            });
+            var response = packages.Select(MapToResponse);
 
             return Result<IEnumerable<ServicePackageResponse>>.Success(response, "Lấy danh sách gói dịch vụ thành công");
         }
@@ -41,14 +47,7 @@ namespace Application.Services
             if (package == null)
                 return Result<ServicePackageResponse>.Failure("Không tìm thấy gói dịch vụ");
 
-            var response = new ServicePackageResponse
-            {
-                Id = package.Id,
-                PackageName = package.PackageName,
-                Price = package.Price,
-                Description = package.Description,
-                DurationMonths = package.DurationMonths
-            };
+            var response = MapToResponse(package);
 
             return Result<ServicePackageResponse>.Success(response, "Lấy chi tiết gói dịch vụ thành công");
         }
@@ -73,15 +72,7 @@ namespace Application.Services
 
             await _repository.AddAsync(entity);
 
-            var response = new ServicePackageResponse
-            {
-                Id = entity.Id,
-                PackageName = entity.PackageName,
-                Price = entity.Price,
-                Description = entity.Description,
-                DurationMonths = entity.DurationMonths,
-                CategoryName = entity.Category?.Name ?? string.Empty
-            };
+            var response = MapToResponse(entity);
 
             return Result<ServicePackageResponse>.Success(response, "Tạo gói dịch vụ thành công");
         }
@@ -109,15 +100,7 @@ namespace Application.Services
 
             await _repository.UpdateAsync(package);
 
-            var response = new ServicePackageResponse
-            {
-                Id = package.Id,
-                PackageName = package.PackageName,
-                Price = package.Price,
-                Description = package.Description,
-                DurationMonths = package.DurationMonths,
-                CategoryName = package.Category?.Name ?? string.Empty
-            };
+            var response = MapToResponse(package);
 
             return Result<ServicePackageResponse>.Success(response, "Cập nhật gói dịch vụ thành công");
         }

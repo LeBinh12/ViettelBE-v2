@@ -1,46 +1,62 @@
-# Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Bb]in/
-[Oo]bj/
-[Ll]ogs/
+# ================================================
+# .NET Build Artifacts (CHẮN TẤT CẢ PROJECT)
+# ================================================
+**/bin/
+**/obj/
 
-# User-specific files
-*.rsuser
+# Cụ thể hơn nếu cần (không bắt buộc nếu dùng **/)
+# WebAPI/bin/
+# WebAPI/obj/
+# Infrastructure/bin/
+# Infrastructure/obj/
+
+# ================================================
+# Visual Studio / Rider / VS Code
+# ================================================
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
-
-# User-specific files (MonoDevelop/Xamarin Studio)
-*.pidb
-*.userprefs
-
-# Build Results
-[Oo]bj/
-[Bb]in/
-[Bb]uild/
-
-# Store app-specific data in the AppData folder, roaming settings per machine
-%USERPROFILE%\.nuget\packages\*
-
-# NuGet v3 cache
-packages\repositories.lock
-!packages/build/
-!packages/repositories.config
-
-# Enable "build/" folder mode in VS
-build/
-!build/*/
-!build/*.*
-!build/*.md
-
-# Packages
-*.nupkg
-# NuGet Symbol Packages
-*.snupkg
-
-# JetBrains Rider
+*.vs/
+*.vscode/
 .idea/
 *.sln.iml
+
+# ================================================
+# Build results
+# ================================================
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# ================================================
+# NuGet & Packages
+# ================================================
+packages/
+*.nupkg
+*.snupkg
+project.lock.json
+artifacts/
+
+# ================================================
+# OS / Editor files
+# ================================================
+.DS_Store
+*.swp
+*.pyc
+Thumbs.db
+Desktop.ini
+
+# ================================================
+# Custom (nếu có)
+# ================================================
+UniversityData/
+.fake
+UploadedFiles/

@@ -52,6 +52,11 @@ builder.Services.AddControllers()
 builder.Services.AddScoped<IUserService, UserAccountService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
+builder.Services.AddScoped<IServicePackageService, ServicePackageService>();
+builder.Services.AddScoped<IServicePackageRepository, ServicePackageRepository>();
+
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 
 builder.Services.AddEndpointsApiExplorer();

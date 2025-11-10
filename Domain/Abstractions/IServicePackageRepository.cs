@@ -1,0 +1,13 @@
+﻿using Domain.Entities;
+
+namespace Domain.Abstractions
+{
+    public interface IServicePackageRepository
+    {
+        Task<IEnumerable<ServicePackage>> GetAllAsync();
+        Task<ServicePackage?> GetByIdAsync(Guid id);
+        Task AddAsync(ServicePackage servicePackage);
+        Task UpdateAsync(ServicePackage servicePackage);
+        Task DeleteAsync(ServicePackage servicePackage);
+    }
+}

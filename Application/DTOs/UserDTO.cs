@@ -2,10 +2,11 @@ namespace Application.DTOs;
 
 public class UserDto
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }  // ✅ Guid match với BaseEntity
     public string Username { get; set; } = "";
     public string Role { get; set; } = "USER";
 }
+
 
 public class RegisterRequest
 {

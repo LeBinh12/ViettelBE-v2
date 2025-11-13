@@ -1,17 +1,22 @@
-﻿using Domain.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Domain.Common;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
 {
-    public class UserAccount : BaseEntity
+    [Table("UserAccounts")]
+    public class UserAccount : AuditableIdentityUser
     {
-        public string Username { get; set; }
-        public string PasswordHash { get; set; }
-        public string Email { get; set; }
-        public string Role { get; set; } 
+        public string? Role { get; set; }
+        public bool isDeleted { get; set; } = false;
+
+       
+        [Column("Username")]
+        public override string? UserName { get; set; }
+
+        [Column("PasswordHash")]
+        public override string? PasswordHash { get; set; }
+
+        [Column("Email")]
+        public override string? Email { get; set; }
     }
 }

@@ -49,5 +49,13 @@ namespace WebAPI.Controllers
             var result = await _service.IsEmailValidAsync(email);
             return Ok(result);
         }
+        
+        // GET: api/Customer/paging?search=...&pageNumber=1&pageSize=10
+                [HttpGet("paging")]
+        public async Task<IActionResult> GetPaged([FromQuery] CustomerPagingRequestDto request)
+        {
+            var result = await _service.GetPagedAsync(request);
+            return Ok(result);
+        }
     }
 }

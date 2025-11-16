@@ -1,4 +1,4 @@
-﻿using Application.DTOs;
+using Application.DTOs;
 using Application.Interfaces;
 using Domain.Entities;
 using System.Text.RegularExpressions;
@@ -128,5 +128,35 @@ namespace Application.Services
             var exists = await _repo.GetByEmailAsync(email);
             return Result<bool>.Success(exists == null, exists == null ? "Email hợp lệ." : "Email đã tồn tại.");
         }
+
+
+        public async Task<Result<PagedResult<CustomerDTO.CustomerResponseDto>>> GetPagedAsync(CustomerPagingRequestDto request)
+        {
+            var (items, totalItems) = await _repo.GetPagedAsync(request.Search, request.PageNumber, request.PageSize);
+
+            var resultItems = items.Select(c => new CustomerDTO.CustomerResponseDto
+            {
+                Id = c.Id,
+                FullName = c.FullName,
+                Email = c.Email,
+                Phone = c.Phone,
+                Address = c.Address,
+                CreatedAt = c.CreatedAt
+            }).ToList();
+
+            var pagedResult = new PagedResult<CustomerDTO.CustomerResponseDto>
+            {
+                Items = resultItems,
+                TotalItems = totalItems,
+                PageNumber = request.PageNumber,
+                PageSize = request.PageSize,
+                TotalPages = (int)Math.Ceiling(totalItems / (double)request.PageSize)
+            };
+
+            return Result<PagedResult<CustomerDTO.CustomerResponseDto>>.Success(
+                pagedResult, "Lấy danh sách phân trang thành công."
+            );
+        }
+
     }
 }

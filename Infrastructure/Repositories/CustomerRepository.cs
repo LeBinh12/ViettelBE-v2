@@ -53,5 +53,31 @@ namespace Infrastructure.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<(List<Customer> Items, int TotalItems)> GetPagedAsync(string? search, int pageNumber, int pageSize)
+        {
+            var query = _context.Customers
+                .Where(c => !c.isDeleted)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                query = query.Where(c =>
+                    c.FullName.Contains(search) ||
+                    c.Email.Contains(search) ||
+                    (c.Phone != null && c.Phone.Contains(search)));
+            }
+
+            int totalItems = await query.CountAsync();
+
+            var items = await query
+                .OrderByDescending(c => c.CreatedAt)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return (items, totalItems);
+        }
+
     }
 }

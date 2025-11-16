@@ -10,5 +10,8 @@ namespace Application.Interfaces
         Task AddAsync(Customer customer);
         Task UpdateAsync(Customer customer);
         Task DeleteAsync(Guid id);
+
+        Task<(List<Customer> Items, int TotalItems)> GetPagedAsync(string? search, int pageNumber, int pageSize);
     }
 }
+

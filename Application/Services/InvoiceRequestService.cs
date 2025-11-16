@@ -190,7 +190,7 @@ public class InvoiceRequestService : IInvoiceRequestService
 
             // Hash block đầu tiên
             var hash = ComputeHash(invoice);
-            invoice.AddBlock("0", hash);
+            // invoice.AddBlock("0", hash);
 
             await _invoiceRepo.AddInvoiceAsync(invoice);
 

@@ -12,11 +12,13 @@ namespace Application.Services
     {
         private readonly IInvoiceRepository _invoiceRepo;
         private readonly IPaymentGateway _paymentGateway;
+        private readonly IBlockchainService _blockchainService;
 
-        public InvoiceService(IInvoiceRepository invoiceRepo, IPaymentGateway paymentGateway)
+        public InvoiceService(IInvoiceRepository invoiceRepo, IPaymentGateway paymentGateway, IBlockchainService blockchainService)
         {
             _invoiceRepo = invoiceRepo;
             _paymentGateway = paymentGateway;
+            _blockchainService = blockchainService;
         }
 
         public async Task<Result<string>> CreateInvoiceAndGetPaymentLinkAsync(Guid customerId, Guid packageId)
@@ -40,12 +42,14 @@ namespace Application.Services
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                 };
-
-                // Hash block đầu tiên
-                var hash = ComputeHash(invoice);
-                invoice.AddBlock("0", hash);
-
-                //Lưu vào DB
+                
+                
+                // Tính public hash và push lên blockchain
+                var publicHash = ComputePublicHash(invoice); // có thể SHA256 toàn bộ JSON
+                var txHash = await _blockchainService.PushInvoiceHashAsync(invoice.Id, publicHash);
+                invoice.AddBlock(publicHash, txHash, "Polygon Testnet" );
+                // invoice.AddPublicBlock(publicHash, txHash, "Polygon Testnet");
+                
                 await _invoiceRepo.AddInvoiceAsync(invoice);
 
                 // Sinh QR có chứa invoiceId đầy đủ
@@ -69,10 +73,10 @@ namespace Application.Services
             if (paidAmount < invoice.Amount)
                 return Result<string>.Failure("Payment amount is less than invoice amount");
 
-            var previousHash = invoice.Blocks.LastOrDefault()?.CurrentHash ?? "0";
-            var currentHash = ComputeHash(invoice);
+            // var previousHash = invoice.Blocks.LastOrDefault()?.CurrentHash ?? "0";
+            // var currentHash = ComputeHash(invoice);
 
-            invoice.MarkAsPaid(previousHash, currentHash);
+            // invoice.MarkAsPaid(previousHash, currentHash);
 
             await _invoiceRepo.UpdateInvoiceAsync(invoice);
 
@@ -100,5 +104,35 @@ namespace Application.Services
             var bytes = Encoding.UTF8.GetBytes($"{invoice.Id}-{invoice.CustemerId}-{invoice.PackageId}-{invoice.Amount}-{invoice.Status}-{DateTime.UtcNow:O}");
             return Convert.ToHexString(sha.ComputeHash(bytes));
         }
+        
+        private string ComputePublicHash(Invoice invoice)
+        {
+            using var sha = SHA256.Create();
+
+            // Lấy dữ liệu cần hash (deterministic)
+            var invoiceData = new
+            {
+                invoice.Id,
+                invoice.CustemerId,
+                invoice.PackageId,
+                invoice.Amount,
+                invoice.Status,
+                invoice.DueDate,
+                invoice.Note
+            };
+
+            // Serialize sang JSON (cố định thứ tự property)
+            var json = System.Text.Json.JsonSerializer.Serialize(invoiceData, new System.Text.Json.JsonSerializerOptions
+            {
+                WriteIndented = false,
+                PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase,
+                DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
+            });
+
+            var bytes = Encoding.UTF8.GetBytes(json);
+            return Convert.ToHexString(sha.ComputeHash(bytes));
+        }
+
+        
     }
 }

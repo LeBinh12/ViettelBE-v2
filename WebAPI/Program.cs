@@ -1,7 +1,10 @@
 using System.Text;
 using Application.Interfaces;
 using Application.Services;
+using Application.Services.Jobs;
 using Domain.Abstractions;
+using Hangfire;
+using Hangfire.PostgreSql;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -10,6 +13,15 @@ using Microsoft.IdentityModel.Tokens;
 using WebAPIDocker.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var rpcUrl = "http://127.0.0.1:7545";
+
+var contractAddress = "0xd9145CCE52D386f254917e481eB44e9943F39138";
+
+var senderPrivateKey = "0x82480a92ebce8fc8274917d3278ec15b1480fd90baca075cde823fa64a7f484e";
+// Đăng ký BlockchainService vào DI container
+builder.Services.AddSingleton<IBlockchainService>(provider =>
+    new BlockchainService(rpcUrl, contractAddress, senderPrivateKey));
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -74,13 +86,27 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Add Hangfire
+builder.Services.AddHangfire(config => 
+    config.UsePostgreSqlStorage(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddHangfireServer();
+
+// Đăng ký job
+builder.Services.AddScoped<InvoiceVerificationJob>();
+
+
 var app = builder.Build();
+
 
 // Áp dụng migration tự động khi app khởi động
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    //db.Database.Migrate();
+    var recurringJobManager = scope.ServiceProvider.GetRequiredService<IRecurringJobManager>();
+    recurringJobManager.AddOrUpdate<InvoiceVerificationJob>(
+        "invoice-verification-job",           // job id
+        job => job.VerifyInvoicesAsync(),     // phương thức
+        Cron.MinuteInterval(5)                // cron expression
+    );
 }
 
 // Middleware

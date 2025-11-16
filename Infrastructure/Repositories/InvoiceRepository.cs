@@ -15,6 +15,16 @@ public class InvoiceRepository : IInvoiceRepository
         }
 
         // ---------- Invoice ----------
+        
+        public async Task<IEnumerable<Invoice>> GetAllInvoicesAsync()
+        {
+            return await _dbContext.Invoices
+                .Include(i => i.Customer)
+                .Include(i => i.Package)
+                .Include(i => i.Blocks)
+                .ToListAsync();
+        }
+        
         public async Task AddInvoiceAsync(Invoice invoice)
         {
             await _dbContext.Invoices.AddAsync(invoice);
@@ -32,9 +42,13 @@ public class InvoiceRepository : IInvoiceRepository
 
         public async Task UpdateInvoiceAsync(Invoice invoice)
         {
-            _dbContext.Invoices.Update(invoice);
+            var existing = await _dbContext.Invoices.FirstOrDefaultAsync(x => x.Id == invoice.Id);
+            if (existing == null) throw new Exception("Invoice not found");
+
+            _dbContext.Entry(existing).CurrentValues.SetValues(invoice);
             await _dbContext.SaveChangesAsync();
         }
+
 
         public async Task<IEnumerable<Invoice>> GetInvoicesByCustomerIdAsync(Guid customerId)
         {
@@ -43,6 +57,12 @@ public class InvoiceRepository : IInvoiceRepository
                 .Include(i => i.Blocks)
                 .Where(i => i.CustemerId == customerId)
                 .ToListAsync();
+        }
+        
+        public async Task<IEnumerable<Invoice>> GetInvoicesToVerifyAsync()
+        {
+            // lấy incremental hoặc tất cả để verify blockchain
+            return await _dbContext.Invoices.Include(i => i.Blocks).ToListAsync();
         }
 
         // ---------- ServicePackage ----------
@@ -69,7 +89,7 @@ public class InvoiceRepository : IInvoiceRepository
         {
             return await _dbContext.BlockchainLedgers
                 .Where(b => b.InvoiceId == invoiceId)
-                .OrderBy(b => b.CreateDate)
+                .OrderBy(b => b.CreatedAt)
                 .ToListAsync();
         }
 

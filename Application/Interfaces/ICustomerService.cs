@@ -11,5 +11,8 @@ namespace Application.Interfaces
         Task<Result<CustomerDTO.CustomerResponseDto>> UpdateAsync(Guid id, CustomerDTO.CustomerRequestDto dto);
         Task<Result<bool>> DeleteAsync(Guid id);
         Task<Result<bool>> IsEmailValidAsync(string email);
+
+        Task<Result<PagedResult<CustomerDTO.CustomerResponseDto>>> GetPagedAsync(CustomerPagingRequestDto request);
     }
 }
+

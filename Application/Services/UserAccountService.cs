@@ -41,7 +41,7 @@ namespace Application.Services
 
             var newUser = new UserAccount()
             {
-                UserName = username,  
+                UserName = username,  // ✅ sửa đúng property
                 Email = email,
                 PasswordHash = passwordHash,
                 Role = "User"
@@ -117,7 +117,7 @@ namespace Application.Services
         {
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.UserName), 
+                new Claim(JwtRegisteredClaimNames.Sub, user.UserName), // ✅ sửa Username -> UserName
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(ClaimTypes.Role, user.Role),
                 new Claim("Id", user.Id.ToString())
@@ -136,10 +136,9 @@ namespace Application.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        // phân trang
+
         public async Task<Result<PagedResult<UserDto>>> GetPagedUsersAsync(int pageNumber, int pageSize)
         {
-           // Lấy danh sách user từ repository
             var (users, totalCount) = await _repository.GetPagedUsersAsync(pageNumber, pageSize, null);
 
             var dtos = users.Select(u => new UserDto
@@ -147,7 +146,7 @@ namespace Application.Services
                 Id = u.Id,
                 Username = u.UserName,
                 Role = u.Role
-            });
+            }).ToList();
 
             var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
 
@@ -156,12 +155,13 @@ namespace Application.Services
                 Items = dtos,
                 TotalItems = totalCount,
                 TotalPages = totalPages,
-                CurrentPage = pageNumber,
+                PageNumber = pageNumber, 
                 PageSize = pageSize
             };
 
             return Result<PagedResult<UserDto>>.Success(result, "Danh sách người dùng đã được tải");
         }
+
 
     }
 }

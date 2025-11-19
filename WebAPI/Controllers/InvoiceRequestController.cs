@@ -19,7 +19,7 @@ public class InvoiceRequestController : ControllerBase
     public async Task<IActionResult> CreateInvoiceRequest([FromBody] InvoiceRequestDto dto)
     {
         var result = await _service.CreateInvoiceRequestTokenAsync(dto);
-        return StatusCode(result.Code, new { token = result.Data });
+        return StatusCode(result.Code,result);
     }
     
     [HttpPost("confirm")]

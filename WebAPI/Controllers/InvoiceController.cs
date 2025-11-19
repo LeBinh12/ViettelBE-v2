@@ -38,7 +38,7 @@ namespace WebAPI.Controllers
                 return BadRequest("InvoiceId not found");
 
             // Tìm hóa đơn trong DB
-            var result = await _invoiceService.GetInvoiceByIdAsync(invoiceId);
+            var result = await _invoiceService.HandlePaymentCallbackAsync(invoiceId);
 
             return StatusCode(result.Code, result);
         }

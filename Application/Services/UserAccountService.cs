@@ -41,7 +41,7 @@ namespace Application.Services
 
             var newUser = new UserAccount()
             {
-                UserName = username,  // ✅ sửa đúng property
+                UserName = username,  //  sửa đúng property
                 Email = email,
                 PasswordHash = passwordHash,
                 Role = "User"

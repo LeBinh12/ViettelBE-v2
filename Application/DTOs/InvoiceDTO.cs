@@ -14,6 +14,7 @@ public class InvoiceRequestDto
     public string FullName { get; set; } = string.Empty;
     public string Phone { get; set; } = string.Empty;
     public string Address { get; set; } = string.Empty;
+    public bool IsChange { get; set; }
 }
 // DTO trả về cảnh báo nếu có thông tin thay đổi
 public class InvoiceRequestCheckResultDto
@@ -31,5 +32,4 @@ public class ConfirmInvoiceRequestDto
 public class ConfirmInvoiceResultDto
 {
     public Guid InvoiceId { get; set; }
-    public string Message { get; set; } = string.Empty;
 }

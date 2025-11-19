@@ -9,5 +9,6 @@ namespace Domain.Abstractions
         Task AddAsync(ServicePackage servicePackage);
         Task UpdateAsync(ServicePackage servicePackage);
         Task DeleteAsync(ServicePackage servicePackage);
+        Task<IEnumerable<ServicePackage>> GetByCategoryAsync(Guid categoryId);
     }
 }

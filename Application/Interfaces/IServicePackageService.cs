@@ -16,5 +16,6 @@ namespace Application.Interfaces
         Task<IResult<ServicePackageResponse>> CreateAsync(ServicePackageRequest request);
         Task<IResult<ServicePackageResponse>> UpdateAsync(ServicePackageUpdateRequest request);
         Task<IResult<bool>> DeleteAsync(Guid id);
+        Task<IResult<IEnumerable<ServicePackageResponse>>> GetByCategoryAsync(Guid categoryId);
     }
 }

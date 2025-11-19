@@ -42,10 +42,6 @@ public class InvoiceRepository : IInvoiceRepository
 
         public async Task UpdateInvoiceAsync(Invoice invoice)
         {
-            var existing = await _dbContext.Invoices.FirstOrDefaultAsync(x => x.Id == invoice.Id);
-            if (existing == null) throw new Exception("Invoice not found");
-
-            _dbContext.Entry(existing).CurrentValues.SetValues(invoice);
             await _dbContext.SaveChangesAsync();
         }
 
@@ -91,6 +87,17 @@ public class InvoiceRepository : IInvoiceRepository
                 .Where(b => b.InvoiceId == invoiceId)
                 .OrderBy(b => b.CreatedAt)
                 .ToListAsync();
+        }
+
+        // Lưu riêng một block mới cho invoice
+        public async Task AddBlockToInvoiceAsync(Guid invoiceId, BlockchainLedger block)
+        {
+            // Gắn invoiceId vào block
+            block.InvoiceId = invoiceId;
+            block.CreatedAt = DateTime.UtcNow;
+
+            await _dbContext.BlockchainLedgers.AddAsync(block);
+            await _dbContext.SaveChangesAsync();
         }
 
     }

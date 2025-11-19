@@ -28,6 +28,14 @@ namespace WebAPI.Controllers
             var result = await _service.GetByIdAsync(id);
             return StatusCode(result.Code, result);
         }
+        
+        [HttpGet("get-by-category/{categoryId}")]
+        public async Task<IActionResult> GetByCategory(Guid categoryId)
+        {
+            var result = await _service.GetByCategoryAsync(categoryId);
+            return StatusCode(result.Code, result);
+        }
+
 
         [HttpPost("add")]
         public async Task<IActionResult> Create(ServicePackageRequest request)
@@ -52,5 +60,6 @@ namespace WebAPI.Controllers
             var result = await _service.DeleteAsync(id);
             return StatusCode(result.Code, result);
         }
+        
     }
 }

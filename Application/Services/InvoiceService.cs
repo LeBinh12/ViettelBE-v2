@@ -13,12 +13,15 @@ namespace Application.Services
         private readonly IInvoiceRepository _invoiceRepo;
         private readonly IPaymentGateway _paymentGateway;
         private readonly IBlockchainService _blockchainService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public InvoiceService(IInvoiceRepository invoiceRepo, IPaymentGateway paymentGateway, IBlockchainService blockchainService)
+        public InvoiceService(IInvoiceRepository invoiceRepo, IPaymentGateway paymentGateway, IBlockchainService blockchainService, IUnitOfWork unitOfWork)
         {
             _invoiceRepo = invoiceRepo;
             _paymentGateway = paymentGateway;
             _blockchainService = blockchainService;
+            _unitOfWork = unitOfWork;
+
         }
 
         public async Task<Result<string>> CreateInvoiceAndGetPaymentLinkAsync(Guid customerId, Guid packageId)
@@ -65,25 +68,55 @@ namespace Application.Services
 
         }
 
-        public async Task<Result<string>> HandlePaymentCallbackAsync(Guid invoiceId, decimal paidAmount)
+        public async Task<Result<bool>> HandlePaymentCallbackAsync(Guid invoiceId)
         {
-            var invoice = await _invoiceRepo.GetInvoiceByIdAsync(invoiceId);
-            if (invoice == null) return Result<string>.Failure("Invoice not found");
+            await _unitOfWork.BeginTransactionAsync();
 
-            if (paidAmount < invoice.Amount)
-                return Result<string>.Failure("Payment amount is less than invoice amount");
+            try
+            {
+                // Lấy invoice từ DB
+                var invoice = await _invoiceRepo.GetInvoiceByIdAsync(invoiceId);
+                if (invoice == null)
+                    return Result<bool>.Failure(false, "Invoice not found");
 
-            // var previousHash = invoice.Blocks.LastOrDefault()?.CurrentHash ?? "0";
-            // var currentHash = ComputeHash(invoice);
+                // Nếu đã thanh toán rồi → return luôn
+                if (invoice.Status == InvoiceStatus.Paid)
+                    return Result<bool>.Success(true, "Invoice already paid");
 
-            // invoice.MarkAsPaid(previousHash, currentHash);
+                // Cập nhật trạng thái hóa đơn -> Paid
+                invoice.Status = InvoiceStatus.Paid;
+                invoice.LastModified = DateTime.UtcNow;
 
-            await _invoiceRepo.UpdateInvoiceAsync(invoice);
+                // Lưu trạng thái Paid
+                await _invoiceRepo.UpdateInvoiceAsync(invoice);
 
-            return Result<string>.Success("Invoice marked as paid");
+                // Tạo public hash cho blockchain
+                string paymentHash = ComputeHash(invoice);
+
+                // Push hash mới lên blockchain
+                var txHash = await _blockchainService.PushInvoiceHashAsync(invoice.Id, paymentHash);
+
+                // Tạo block mới
+                var block = new BlockchainLedger
+                {
+                    PublicHash = paymentHash,
+                    TransactionHash = txHash,
+                    BlockchainNetwork = "Polygon Testnet"
+                };
+
+                // Lưu block riêng
+                await _invoiceRepo.AddBlockToInvoiceAsync(invoice.Id, block);
+
+                await _unitOfWork.CommitAsync();
+
+                return await Result<bool>.SuccessAsync(true, "Invoice marked as paid and blockchain updated");
+            }
+            catch (Exception ex)
+            {
+                await _unitOfWork.RollbackAsync();
+                return await Result<bool>.FailureAsync(false, $"Callback error: {ex.Message}");
+            }
         }
-
-
         public async Task<Result<Invoice>> GetInvoiceByIdAsync(Guid invoiceId)
         {
             try
@@ -133,6 +166,38 @@ namespace Application.Services
             return Convert.ToHexString(sha.ComputeHash(bytes));
         }
 
+        public Guid ExtractInvoiceId(string raw)
+        {
+            // Bỏ prefix THANHTOAN
+            var idPart = raw.Replace("THANHTOAN", "");
+
+            // Thêm dấu '-' để thành UUID hợp lệ
+            string formatted = idPart.Insert(8, "-")
+                .Insert(13, "-")
+                .Insert(18, "-")
+                .Insert(23, "-");
+
+            return Guid.Parse(formatted);
+        }
         
+        private async Task AddPaymentBlockAsync(Invoice invoice)
+        {
+            string newHash = ComputeHash(invoice);
+
+            // Push hash lên blockchain
+            var txHash = await _blockchainService.PushInvoiceHashAsync(invoice.Id, newHash);
+
+            // Lưu block
+            invoice.AddBlock(
+                publicHash: newHash,
+                txHash: txHash,
+                network: "Polygon Testnet"
+            );
+
+            invoice.LastModified = DateTime.UtcNow;
+            invoice.Status = InvoiceStatus.Paid;
+        }
+
+
     }
 }

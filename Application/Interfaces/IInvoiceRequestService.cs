@@ -6,5 +6,5 @@ namespace Application.Interfaces;
 public interface IInvoiceRequestService
 {
     Task<Result<InvoiceRequestCheckResultDto>> CreateInvoiceRequestTokenAsync(InvoiceRequestDto dto);
-    Task<Result<ConfirmInvoiceResultDto>> ConfirmInvoiceAsync(ConfirmInvoiceRequestDto dto);
+    Task<Result<string>> ConfirmInvoiceAsync(ConfirmInvoiceRequestDto dto);
 }

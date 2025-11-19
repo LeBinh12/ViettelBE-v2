@@ -19,43 +19,44 @@ public class InvoiceRequestService : IInvoiceRequestService
     private readonly IEmailService _emailService;
     private readonly ICustomerService _customerService;
     private readonly ICustomerRepository _customerRepo;
+    private readonly IPaymentGateway _paymentGateway;
+
     public InvoiceRequestService(IConfiguration configuration, IInvoiceRepository invoiceRepo,
-                    IEmailService emailService, ICustomerService customerService, ICustomerRepository customerRepo)
+                    IEmailService emailService, ICustomerService customerService, ICustomerRepository customerRepo,  IPaymentGateway paymentGateway)
     {
         _configuration = configuration;
         _invoiceRepo = invoiceRepo;
-        _frontendUrl = configuration["Frontend:ConfirmInvoiceUrl"] ?? "http://localhost:5173/confirm-invoice";
+        _frontendUrl = configuration["Frontend:ConfirmInvoiceUrl"] ?? "http://localhost:5175/confirm-payment";
         _emailService = emailService;
         _customerService = customerService;
         _customerRepo = customerRepo;
+        _paymentGateway = paymentGateway;
+
     }
 
     public async Task<Result<InvoiceRequestCheckResultDto>> CreateInvoiceRequestTokenAsync(InvoiceRequestDto dto)
     {
         var result = new InvoiceRequestCheckResultDto();
 
-        
-        var emailCheck = await _customerService.IsEmailValidAsync(dto.Email);
-        if (!emailCheck.Succeeded || !emailCheck.Data)
+        if (!dto.IsChange)
         {
-            throw new Exception("Email không hợp lệ hoặc đã tồn tại.");
-        }
+            // Kiểm tra user theo email
+            var existingUser = (await _customerRepo.GetAllAsync())
+                .FirstOrDefault(c => c.Email == dto.Email);
 
-
-        
-        // Kiểm tra user theo email
-        var existingUser = (await _customerRepo.GetAllAsync())
-            .FirstOrDefault(c => c.Email == dto.Email);
-
-        if (existingUser != null)
-        {
-            // So sánh thông tin hiện tại với thông tin mới
-            if (existingUser.FullName != dto.FullName) result.ChangedFields.Add("FullName");
-            if (existingUser.Phone != dto.Phone) result.ChangedFields.Add("Phone");
-
-            if (result.ChangedFields.Any())
+            if (existingUser != null)
             {
-                result.HasChanges = true;
+                // So sánh thông tin hiện tại với thông tin mới
+                if (existingUser.FullName != dto.FullName) result.ChangedFields.Add("FullName");
+                if (existingUser.Phone != dto.Phone) result.ChangedFields.Add("Phone");
+                if (existingUser.Address != dto.Address) result.ChangedFields.Add("Address");
+
+                if (result.ChangedFields.Any())
+                {
+                    result.HasChanges = true;
+                    return await  Result<InvoiceRequestCheckResultDto>.SuccessAsync(result,
+                        "Dữ liệu của bạn đã thay đổi. Bạn có muốn cập nhật dữ liệu này không?");
+                }
             }
         }
 
@@ -94,7 +95,8 @@ public class InvoiceRequestService : IInvoiceRequestService
         );
         var tokenStr = new JwtSecurityTokenHandler().WriteToken(token);
         result.Token = tokenStr;
-        // ---- Gửi email kèm link xác nhận ----
+        result.HasChanges = false;
+        //  Gửi email kèm link xác nhận
         var confirmLink = $"{_frontendUrl}?token={tokenStr}";
         var subject = "Xác nhận hóa đơn của bạn";
         var html = $@"
@@ -105,11 +107,11 @@ public class InvoiceRequestService : IInvoiceRequestService
         <p>Nếu bạn không yêu cầu, vui lòng bỏ qua email này.</p>
     ";
         await _emailService.SendEmailAsync(dto.Email, subject, html);
-
-        return Result<InvoiceRequestCheckResultDto>.Success(result);
+        
+        return await Result<InvoiceRequestCheckResultDto>.SuccessAsync(result, "Đã xử lý bạn cần check email");
     }
 
-    public async Task<Result<ConfirmInvoiceResultDto>> ConfirmInvoiceAsync(ConfirmInvoiceRequestDto dto)
+    public async Task<Result<string>> ConfirmInvoiceAsync(ConfirmInvoiceRequestDto dto)
     {
         try
         {
@@ -174,7 +176,7 @@ public class InvoiceRequestService : IInvoiceRequestService
             // 3. Tạo hóa đơn
             var package = await _invoiceRepo.GetPackageByIdAsync(packageId);
             if (package == null)
-                return Result<ConfirmInvoiceResultDto>.Failure("Package not found");
+                return Result<string>.Failure("Package not found");
 
             var invoice = new Invoice
             {
@@ -188,21 +190,18 @@ public class InvoiceRequestService : IInvoiceRequestService
                 UpdatedAt = DateTime.UtcNow
             };
 
-            // Hash block đầu tiên
-            var hash = ComputeHash(invoice);
-            // invoice.AddBlock("0", hash);
-
             await _invoiceRepo.AddInvoiceAsync(invoice);
+            
 
-            return Result<ConfirmInvoiceResultDto>.Success(new ConfirmInvoiceResultDto
-            {
-                InvoiceId = invoice.Id,
-                Message = "Hóa đơn của bạn đã được tạo thành công!"
-            });
+            // Sinh QR có chứa invoiceId đầy đủ
+            var qrUrl = _paymentGateway.GeneratePaymentLink(invoice.Id, invoice.Amount ?? 0);
+
+
+            return await Result<string>.SuccessAsync(qrUrl,"Hóa đơn của bạn đã được tạo thành công!");
         }
         catch (Exception ex)
         {
-            return Result<ConfirmInvoiceResultDto>.Failure(ex.Message);
+            return Result<string>.Failure(ex.Message);
         }
     }
 

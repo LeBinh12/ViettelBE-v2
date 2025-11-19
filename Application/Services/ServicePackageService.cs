@@ -115,5 +115,13 @@ namespace Application.Services
             await _repository.DeleteAsync(package);
             return Result<bool>.Success(true, "Xóa gói dịch vụ thành công");
         }
+        
+        public async Task<IResult<IEnumerable<ServicePackageResponse>>> GetByCategoryAsync(Guid categoryId)
+        {
+            var packages = await _repository.GetByCategoryAsync(categoryId);
+            var response = packages.Select(MapToResponse);
+            return Result<IEnumerable<ServicePackageResponse>>.Success(response, "Lấy danh sách gói theo category thành công");
+        }
+
     }
 }

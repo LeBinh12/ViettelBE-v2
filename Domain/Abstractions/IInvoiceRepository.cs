@@ -17,7 +17,7 @@ public interface IInvoiceRepository
     
 
     // Blockchain Ledger
-    Task AddBlockchainLedgerAsync(BlockchainLedger block);
+    Task AddBlockToInvoiceAsync(Guid invoiceId, BlockchainLedger block);
     Task<IEnumerable<BlockchainLedger>> GetBlockchainByInvoiceIdAsync(Guid invoiceId);
     Task<IEnumerable<Invoice>> GetInvoicesToVerifyAsync();
 }

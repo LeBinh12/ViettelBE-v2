@@ -47,5 +47,14 @@ namespace Infrastructure.Repositories
             _context.ServicePackages.Update(servicePackage);
             await _context.SaveChangesAsync();
         }
+        
+        public async Task<IEnumerable<ServicePackage>> GetByCategoryAsync(Guid categoryId)
+        {
+            return await _context.ServicePackages
+                .Include(p => p.Category)
+                .Where(p => !p.isDeleted && p.CategoryId == categoryId)
+                .ToListAsync();
+        }
+
     }
 }

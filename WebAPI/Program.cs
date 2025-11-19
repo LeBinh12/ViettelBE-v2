@@ -102,6 +102,11 @@ var app = builder.Build();
 // Áp dụng migration tự động khi app khởi động
 using (var scope = app.Services.CreateScope())
 {
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+    // ✔ Tự tạo bảng nếu chưa có
+    db.Database.Migrate();
+    
     var recurringJobManager = scope.ServiceProvider.GetRequiredService<IRecurringJobManager>();
     recurringJobManager.AddOrUpdate<InvoiceVerificationJob>(
         "invoice-verification-job",           // job id

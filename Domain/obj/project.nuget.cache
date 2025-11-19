@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "czN2SzRQA6Y=",
+  "dgSpecHash": "P/kNrUA934o=",
   "success": true,
   "projectFilePath": "E:\\Cá nhân\\BTLWeb\\BEViettel\\Domain\\Domain.csproj",
   "expectedPackageFiles": [
@@ -85,7 +85,6 @@
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\system.threading.tasks.extensions\\4.6.0\\system.threading.tasks.extensions.4.6.0.nupkg.sha512",
-    "C:\\Users\\PHUOC BINH\\.nuget\\packages\\microsoft.net.sdk.compilers.toolset\\9.0.305\\microsoft.net.sdk.compilers.toolset.9.0.305.nupkg.sha512",
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.20\\microsoft.netcore.app.ref.8.0.20.nupkg.sha512",
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.20\\microsoft.windowsdesktop.app.ref.8.0.20.nupkg.sha512",
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.20\\microsoft.aspnetcore.app.ref.8.0.20.nupkg.sha512",
@@ -95,8 +94,10 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "warningLevel": 1,
       "message": "Package 'EntityFramework 6.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "projectPath": "E:\\Cá nhân\\BTLWeb\\BEViettel\\Domain\\Domain.csproj",
+      "warningLevel": 1,
+      "filePath": "E:\\Cá nhân\\BTLWeb\\BEViettel\\Domain\\Domain.csproj",
       "libraryId": "EntityFramework",
       "targetGraphs": [
         "net8.0"
@@ -105,8 +106,10 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "warningLevel": 1,
       "message": "Package 'Microsoft.AspNet.Identity.Core 2.2.4' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "projectPath": "E:\\Cá nhân\\BTLWeb\\BEViettel\\Domain\\Domain.csproj",
+      "warningLevel": 1,
+      "filePath": "E:\\Cá nhân\\BTLWeb\\BEViettel\\Domain\\Domain.csproj",
       "libraryId": "Microsoft.AspNet.Identity.Core",
       "targetGraphs": [
         "net8.0"
@@ -115,8 +118,10 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "warningLevel": 1,
       "message": "Package 'Microsoft.AspNet.Identity.EntityFramework 2.2.4' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "projectPath": "E:\\Cá nhân\\BTLWeb\\BEViettel\\Domain\\Domain.csproj",
+      "warningLevel": 1,
+      "filePath": "E:\\Cá nhân\\BTLWeb\\BEViettel\\Domain\\Domain.csproj",
       "libraryId": "Microsoft.AspNet.Identity.EntityFramework",
       "targetGraphs": [
         "net8.0"

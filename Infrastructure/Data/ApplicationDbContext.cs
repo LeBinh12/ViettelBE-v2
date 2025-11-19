@@ -1,4 +1,4 @@
-using Domain.Entities;
+﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
@@ -37,8 +37,8 @@ namespace Infrastructure.Data
 
             modelBuilder.Entity<BlockchainLedger>()
                 .HasOne(b => b.Invoice)
-                .WithOne()
-                .HasForeignKey<BlockchainLedger>(b => b.InvoiceId)
+                .WithMany(i => i.Blocks)
+                .HasForeignKey(b => b.InvoiceId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Invoice>()

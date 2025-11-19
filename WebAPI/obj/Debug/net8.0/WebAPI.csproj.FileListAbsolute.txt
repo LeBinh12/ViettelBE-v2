@@ -203,4 +203,3 @@ E:\Cá nhân\BTLWeb\BEViettel\WebAPI\bin\Debug\net8.0\zh-TW\Hangfire.Core.resour
 E:\Cá nhân\BTLWeb\BEViettel\WebAPI\bin\Debug\net8.0\zh\Hangfire.Core.resources.dll
 E:\Cá nhân\BTLWeb\BEViettel\WebAPI\bin\Debug\net8.0\Dapper.dll
 E:\Cá nhân\BTLWeb\BEViettel\WebAPI\bin\Debug\net8.0\Hangfire.PostgreSql.dll
-E:\Cá nhân\BTLWeb\BEViettel\WebAPI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

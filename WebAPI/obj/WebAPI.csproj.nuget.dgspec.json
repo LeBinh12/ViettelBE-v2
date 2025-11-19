@@ -65,6 +65,10 @@
               "target": "Package",
               "version": "[8.14.0, )"
             },
+            "Nethereum.Web3": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[8.14.0, )"
@@ -249,6 +253,9 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
+              "E:\\Cá nhân\\BTLWeb\\BEViettel\\Application\\Application.csproj": {
+                "projectPath": "E:\\Cá nhân\\BTLWeb\\BEViettel\\Application\\Application.csproj"
+              },
               "E:\\Cá nhân\\BTLWeb\\BEViettel\\Domain\\Domain.csproj": {
                 "projectPath": "E:\\Cá nhân\\BTLWeb\\BEViettel\\Domain\\Domain.csproj"
               }
@@ -444,6 +451,9 @@
               "E:\\Cá nhân\\BTLWeb\\BEViettel\\Application\\Application.csproj": {
                 "projectPath": "E:\\Cá nhân\\BTLWeb\\BEViettel\\Application\\Application.csproj"
               },
+              "E:\\Cá nhân\\BTLWeb\\BEViettel\\Domain\\Domain.csproj": {
+                "projectPath": "E:\\Cá nhân\\BTLWeb\\BEViettel\\Domain\\Domain.csproj"
+              },
               "E:\\Cá nhân\\BTLWeb\\BEViettel\\Infrastructure\\Infrastructure.csproj": {
                 "projectPath": "E:\\Cá nhân\\BTLWeb\\BEViettel\\Infrastructure\\Infrastructure.csproj"
               }
@@ -466,6 +476,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Hangfire": {
+              "target": "Package",
+              "version": "[1.8.22, )"
+            },
+            "Hangfire.PostgreSql": {
+              "target": "Package",
+              "version": "[1.20.12, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[8.0.18, )"

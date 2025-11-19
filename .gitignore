@@ -1,0 +1,62 @@
+# ================================================
+# .NET Build Artifacts (CHẮN TẤT CẢ PROJECT)
+# ================================================
+**/bin/
+**/obj/
+
+# Cụ thể hơn nếu cần (không bắt buộc nếu dùng **/)
+# WebAPI/bin/
+# WebAPI/obj/
+# Infrastructure/bin/
+# Infrastructure/obj/
+
+# ================================================
+# Visual Studio / Rider / VS Code
+# ================================================
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vs/
+*.vscode/
+.idea/
+*.sln.iml
+
+# ================================================
+# Build results
+# ================================================
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# ================================================
+# NuGet & Packages
+# ================================================
+packages/
+*.nupkg
+*.snupkg
+project.lock.json
+artifacts/
+
+# ================================================
+# OS / Editor files
+# ================================================
+.DS_Store
+*.swp
+*.pyc
+Thumbs.db
+Desktop.ini
+
+# ================================================
+# Custom (nếu có)
+# ================================================
+UniversityData/
+.fake
+UploadedFiles/

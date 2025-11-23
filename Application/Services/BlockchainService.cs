@@ -1,7 +1,10 @@
 using System.Numerics;
+using Application.DTOs;
 using Application.Interfaces;
+using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.Hex.HexTypes;
 using Nethereum.Web3;
+using Share;
 
 namespace Application.Services;
 
@@ -14,28 +17,32 @@ public class BlockchainService : IBlockchainService
     // RPC = https://mainnet.infura.io/v3/13c2c1b2df36470898405a574a72ac65
     
     private const string ABI = @"[
-      {
-        ""inputs"": [
-          { ""internalType"": ""uint256"", ""name"": ""invoiceId"", ""type"": ""uint256"" },
-          { ""internalType"": ""string"", ""name"": ""hash"", ""type"": ""string"" }
-        ],
-        ""name"": ""storeInvoiceHash"",
-        ""outputs"": [],
-        ""stateMutability"": ""nonpayable"",
-        ""type"": ""function""
-      },
-      {
-        ""inputs"": [
-          { ""internalType"": ""uint256"", ""name"": ""invoiceId"", ""type"": ""uint256"" }
-        ],
-        ""name"": ""getInvoiceHash"",
-        ""outputs"": [
-          { ""internalType"": ""string"", ""name"": """", ""type"": ""string"" }
-        ],
-        ""stateMutability"": ""view"",
-        ""type"": ""function""
-      }
-    ]";
+  {
+    ""inputs"": [
+      { ""internalType"": ""bytes32"", ""name"": ""invoiceId"", ""type"": ""bytes32"" },
+      { ""internalType"": ""bytes32"", ""name"": ""hashValue"", ""type"": ""bytes32"" },
+      { ""internalType"": ""string"", ""name"": ""note"", ""type"": ""string"" }
+    ],
+    ""name"": ""storeInvoiceHash"",
+    ""outputs"": [],
+    ""stateMutability"": ""nonpayable"",
+    ""type"": ""function""
+  },
+  {
+    ""inputs"": [
+      { ""internalType"": ""bytes32"", ""name"": ""invoiceId"", ""type"": ""bytes32"" }
+    ],
+    ""name"": ""getLatestInvoiceHash"",
+    ""outputs"": [
+      { ""internalType"": ""bytes32"", ""name"": """", ""type"": ""bytes32"" },
+      { ""internalType"": ""bool"", ""name"": """", ""type"": ""bool"" }
+    ],
+    ""stateMutability"": ""view"",
+    ""type"": ""function""
+  }
+]
+";
+
     
     private static BigInteger GuidToUInt256(Guid guid)
     {
@@ -53,25 +60,62 @@ public class BlockchainService : IBlockchainService
         _senderPrivateKey = senderPrivateKey;
     }
 
-    public async Task<string> PushInvoiceHashAsync(Guid invoiceId, string hash)
+    public async Task<string> PushInvoiceHashAsync(Guid invoiceId, string hashValue)
     {
-        var uintInvoiceId = GuidToUInt256(invoiceId);
         var contract = _web3.Eth.GetContract(ABI, _contractAddress);
         var storeFunction = contract.GetFunction("storeInvoiceHash");
+
+        byte[] invoiceKey = GuidToBytes32(invoiceId);
+        byte[] hashBytes = GuidConverter.HexStringToBytes32(hashValue);
+
         var txHash = await storeFunction.SendTransactionAsync(
             _web3.TransactionManager.Account.Address,
             new HexBigInteger(300000),
             new HexBigInteger(0),
-            uintInvoiceId, // convert Guid -> uint hoặc hash
-            hash
+            invoiceKey,
+            hashBytes,
+            "PAID"
         );
+
+        var receipt = await _web3.Eth.Transactions.GetTransactionReceipt.SendRequestAsync(txHash);
+        while (receipt == null)
+        {
+            await Task.Delay(500);
+            receipt = await _web3.Eth.Transactions.GetTransactionReceipt.SendRequestAsync(txHash);
+        }
+
         return txHash;
     }
 
-    public async Task<string> GetInvoiceHashAsync(Guid invoiceId)
+
+    public async Task<string?> GetInvoiceHashAsync(Guid invoiceId)
     {
         var contract = _web3.Eth.GetContract(ABI, _contractAddress);
-        var getFunction = contract.GetFunction("getInvoiceHash");
-        return await getFunction.CallAsync<string>(invoiceId.GetHashCode());
+        var getFn = contract.GetFunction("getLatestInvoiceHash");
+
+        byte[] invoiceKey = GuidToBytes32(invoiceId);
+
+        var result = await getFn.CallDeserializingToObjectAsync<GetLatestInvoiceHashOutputDTO>(invoiceKey);
+
+        if (result == null || !result.Exists)
+            return null;
+
+        return result.Hash.ToHex();
+    }
+
+    public static byte[] GuidToBytes32(Guid guid)
+    {
+        byte[] guidBytes = guid.ToByteArray(); // 16 bytes
+        byte[] bytes32 = new byte[32];
+        Buffer.BlockCopy(guidBytes, 0, bytes32, 0, 16); 
+        return bytes32;
+    }
+    
+    private static byte[] HexStringToBytes32(string hex)
+    {
+        var bytes = hex.HexToByteArray();
+        if (bytes.Length != 32)
+            throw new Exception("Hash must be exactly 32 bytes for bytes32!");
+        return bytes;
     }
 }

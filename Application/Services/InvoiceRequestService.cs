@@ -9,6 +9,7 @@ using Domain.Entities;
 using Domain.Enums;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Nethereum.Contracts.QueryHandlers.MultiCall;
 using Share;
 
 public class InvoiceRequestService : IInvoiceRequestService
@@ -187,7 +188,9 @@ public class InvoiceRequestService : IInvoiceRequestService
                 Status = InvoiceStatus.Pending,
                 DueDate = DateTime.UtcNow.AddMonths(package.DurationMonths),
                 CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow
+                UpdatedAt = DateTime.UtcNow,
+                BlockchainTxHash = "PENDING" // giá trị tạm
+
             };
 
             await _invoiceRepo.AddInvoiceAsync(invoice);
@@ -201,8 +204,65 @@ public class InvoiceRequestService : IInvoiceRequestService
         }
         catch (Exception ex)
         {
-            return Result<string>.Failure(ex.Message);
+            var error = ex.InnerException?.Message ?? ex.Message;
+            return Result<string>.Failure("ERR: " + error);
         }
+    }
+
+    public async Task<Result<bool>> InvoiceCheckHistoryRequestTokenAsync(InvoicecCheckHistoryRequestDto dto)
+    {
+        var existingUser = (await _customerRepo.GetAllAsync())
+            .FirstOrDefault(c => c.Email == dto.Email);
+        if (existingUser == null)
+            return await Result<bool>.FailureAsync("Email người dùng không tồn tại");
+
+        if (existingUser.Phone != dto.Phone)
+            return await Result<bool>.FailureAsync("Số điện thoại không hợp lệ");
+
+        // Tạo claims để lưu tất cả thông tin
+        var claims = new[]
+        {
+            new Claim("id", existingUser.Id.ToString()),
+        };
+
+        var secret = _configuration["Jwt:Key"];
+        if (string.IsNullOrEmpty(secret))
+            throw new InvalidOperationException("JWT Key is not configured.");
+
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
+
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        var issuer = _configuration["Jwt:Issuer"];
+        var audience = _configuration["Jwt:Audience"];
+
+        if (string.IsNullOrEmpty(issuer) || string.IsNullOrEmpty(audience))
+            throw new InvalidOperationException("JWT Issuer or Audience is missing.");
+
+        var token = new JwtSecurityToken(
+            issuer: issuer,
+            audience: audience,
+            claims: claims,
+            expires: DateTime.UtcNow.AddMinutes(30),
+            signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
+        );
+        var tokenStr = new JwtSecurityTokenHandler().WriteToken(token);
+        
+        // Tạo link frontend
+        var confirmLink = $"http://localhost:5175/InvoiceManagement?token={tokenStr}";
+        var subject = "Xem lịch sử giao dịch của bạn";
+
+        var html = $@"
+        <p>Xin chào {existingUser.FullName},</p>
+        <p>Bạn đã yêu cầu xem lịch sử giao dịch của mình.</p>
+        <p>Vui lòng bấm vào nút dưới đây để xem tất cả hóa đơn của bạn (chưa thanh toán, đã thanh toán):</p>
+        <p><a href='{confirmLink}' style='padding:10px 20px; background-color:#4CAF50; color:white; text-decoration:none;'>Xem lịch sử giao dịch</a></p>
+        <p>Nếu bạn không yêu cầu, vui lòng bỏ qua email này.</p>
+    ";
+
+        await _emailService.SendEmailAsync(dto.Email, subject, html);
+        
+        return await Result<bool>.SuccessAsync(true, "Đã xử lý bạn cần check email");
     }
 
     private string ComputeHash(Invoice invoice)

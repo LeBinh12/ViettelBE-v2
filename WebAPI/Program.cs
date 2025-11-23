@@ -14,14 +14,14 @@ using WebAPIDocker.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var rpcUrl = "http://127.0.0.1:7545";
+        var rpcUrl = "https://sepolia.infura.io/v3/13c2c1b2df36470898405a574a72ac65";
 
-var contractAddress = "0xd9145CCE52D386f254917e481eB44e9943F39138";
+        var contractAddress = "0x4b5DC8DC92492c52E23De4975e30FCD5f550222F";
 
-var senderPrivateKey = "0x82480a92ebce8fc8274917d3278ec15b1480fd90baca075cde823fa64a7f484e";
-// Đăng ký BlockchainService vào DI container
-builder.Services.AddSingleton<IBlockchainService>(provider =>
-    new BlockchainService(rpcUrl, contractAddress, senderPrivateKey));
+        var senderPrivateKey = "2a1a4a534cceafbe4eef95d3b9ea502730edac8bc629ec3a9c8194e1ff0a561b";
+        // Đăng ký BlockchainService vào DI container
+        builder.Services.AddSingleton<IBlockchainService>(provider =>
+            new BlockchainService(rpcUrl, contractAddress, senderPrivateKey));
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

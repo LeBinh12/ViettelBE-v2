@@ -51,5 +51,12 @@ namespace WebAPI.Controllers
             var result = await _invoiceService.GetInvoiceByIdAsync(invoiceId);
             return StatusCode(result.Code, result);
         }
+        
+        [HttpGet("get-by-customer/{token}")]
+        public async Task<IActionResult> GetByCustomerInvoice(string token)
+        {
+            var result = await _invoiceService.GetInvoicesByCustomerAsync(token);
+            return StatusCode(result.Code, result);
+        }
     }
 }

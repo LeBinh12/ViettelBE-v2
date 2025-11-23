@@ -21,7 +21,6 @@ public class InvoiceRepository : IInvoiceRepository
             return await _dbContext.Invoices
                 .Include(i => i.Customer)
                 .Include(i => i.Package)
-                .Include(i => i.Blocks)
                 .ToListAsync();
         }
         
@@ -36,7 +35,6 @@ public class InvoiceRepository : IInvoiceRepository
             return await _dbContext.Invoices
                 .Include(i => i.Customer)
                 .Include(i => i.Package)
-                .Include(i => i.Blocks)
                 .FirstOrDefaultAsync(i => i.Id == invoiceId);
         }
 
@@ -50,17 +48,10 @@ public class InvoiceRepository : IInvoiceRepository
         {
             return await _dbContext.Invoices
                 .Include(i => i.Package)
-                .Include(i => i.Blocks)
                 .Where(i => i.CustemerId == customerId)
                 .ToListAsync();
         }
         
-        public async Task<IEnumerable<Invoice>> GetInvoicesToVerifyAsync()
-        {
-            // lấy incremental hoặc tất cả để verify blockchain
-            return await _dbContext.Invoices.Include(i => i.Blocks).ToListAsync();
-        }
-
         // ---------- ServicePackage ----------
         public async Task<ServicePackage?> GetPackageByIdAsync(Guid packageId)
         {

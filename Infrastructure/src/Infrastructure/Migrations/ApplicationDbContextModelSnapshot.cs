@@ -3,20 +3,17 @@ using System;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Infrastructure.Migrations
+namespace Infrastructure.src.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251119135732_InitialCreate")]
-    partial class InitialCreate
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,7 +45,8 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InvoiceId");
+                    b.HasIndex("InvoiceId")
+                        .IsUnique();
 
                     b.ToTable("BlockchainLedgers", (string)null);
                 });
@@ -126,6 +124,16 @@ namespace Infrastructure.Migrations
 
                     b.Property<decimal?>("Amount")
                         .HasColumnType("numeric");
+
+                    b.Property<string>("BlockchainHash")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("BlockchainRecordedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("BlockchainTxHash")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -253,8 +261,8 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.BlockchainLedger", b =>
                 {
                     b.HasOne("Domain.Entities.Invoice", "Invoice")
-                        .WithMany("Blocks")
-                        .HasForeignKey("InvoiceId")
+                        .WithOne()
+                        .HasForeignKey("Domain.Entities.BlockchainLedger", "InvoiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -293,11 +301,6 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.Category", b =>
                 {
                     b.Navigation("Packages");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Invoice", b =>
-                {
-                    b.Navigation("Blocks");
                 });
 #pragma warning restore 612, 618
         }

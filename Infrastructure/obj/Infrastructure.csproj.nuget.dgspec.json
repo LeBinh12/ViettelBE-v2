@@ -61,6 +61,14 @@
               "target": "Package",
               "version": "[4.0.3, )"
             },
+            "ClosedXML": {
+              "target": "Package",
+              "version": "[0.105.0, )"
+            },
+            "ClosedXML_Excel": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
               "version": "[8.14.0, )"

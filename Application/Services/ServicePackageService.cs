@@ -40,6 +40,19 @@ namespace Application.Services
 
             return Result<IEnumerable<ServicePackageResponse>>.Success(response, "Lấy danh sách gói dịch vụ thành công");
         }
+        
+        public async Task<IResult<IEnumerable<ServicePackageResponse>>> SearchAsync(string? keyword)
+        {
+            var packages = await _repository.SearchAsync(keyword);
+
+            var response = packages.Select(MapToResponse);
+
+            return Result<IEnumerable<ServicePackageResponse>>.Success(
+                response,
+                "Tìm kiếm gói dịch vụ thành công"
+            );
+        }
+
 
         public async Task<IResult<ServicePackageResponse>> GetByIdAsync(Guid id)
         {

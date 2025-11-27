@@ -1,4 +1,5 @@
 using Domain.Entities;
+using Domain.Enums;
 using Nethereum.ABI.FunctionEncoding.Attributes;
 
 namespace Application.DTOs;
@@ -24,14 +25,15 @@ public class InvoiceRequestDto
     public string FullName { get; set; } = string.Empty;
     public string Phone { get; set; } = string.Empty;
     public string Address { get; set; } = string.Empty;
-    public bool IsChange { get; set; }
+    
+    public string? Password { get; set; } = string.Empty;
+    public bool IsRegister { get; set; } = false;
 }
 
 // DTO trả về cảnh báo nếu có thông tin thay đổi
 public class InvoiceRequestCheckResultDto
 {
-    public bool HasChanges { get; set; }
-    public List<string> ChangedFields { get; set; } = new();
+    public bool isPassword { get; set; }
     public string Token { get; set; } = string.Empty;
 }
 
@@ -61,4 +63,31 @@ public class GetLatestInvoiceHashOutputDTO : IFunctionOutputDTO
 
     [Parameter("bool", "", 2)]
     public bool Exists { get; set; }
+}
+
+
+public class InvoiceFilterDto
+{
+    public Guid? InvoiceId { get; set; }
+    public Guid? CustomerName { get; set; }
+    public string? Email { get; set; }
+    public string? Phone { get; set; }
+    public Guid? PackageName { get; set; }
+    public InvoiceStatus? Status { get; set; }
+
+}
+
+
+public class InvoiceResponseFilterDto
+{
+    public Guid? InvoiceId { get; set; }
+    public string? CustomerName { get; set; }
+    public decimal? Amount { get; set; }
+    public string? Email { get; set; }
+    public string? Phone { get; set; }
+    public string? PackageName { get; set; }
+    public InvoiceStatus? Status { get; set; }
+    public bool IsTampered { get; set; } = false;
+    public DateTime CreatedAt { get; set; }
+
 }

@@ -13,6 +13,11 @@ namespace Application.Interfaces
         Task<Result<bool>> IsEmailValidAsync(string email);
 
         Task<Result<PagedResult<CustomerDTO.CustomerResponseDto>>> GetPagedAsync(CustomerPagingRequestDto request);
+
+        Task<Result<string>> LoginByEmailMagicLinkAsync(string email);
+        Task<Result<CustomerDTO.CustomerResponseDto>> GetByIdAsync(Guid id);
+        Task<Result<string>> LoginByEmailPasswordAsync(string email, string password);
+
     }
 }
 

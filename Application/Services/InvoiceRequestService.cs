@@ -9,7 +9,6 @@ using Domain.Entities;
 using Domain.Enums;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Nethereum.Contracts.QueryHandlers.MultiCall;
 using Share;
 
 public class InvoiceRequestService : IInvoiceRequestService
@@ -21,9 +20,12 @@ public class InvoiceRequestService : IInvoiceRequestService
     private readonly ICustomerService _customerService;
     private readonly ICustomerRepository _customerRepo;
     private readonly IPaymentGateway _paymentGateway;
+    private readonly InvoiceSnapshotService _snapshotService;
+    private readonly IUnitOfWork _unitOfWork;
 
     public InvoiceRequestService(IConfiguration configuration, IInvoiceRepository invoiceRepo,
-                    IEmailService emailService, ICustomerService customerService, ICustomerRepository customerRepo,  IPaymentGateway paymentGateway)
+                    IEmailService emailService, ICustomerService customerService, ICustomerRepository customerRepo,
+                    IPaymentGateway paymentGateway,InvoiceSnapshotService snapshotService, IUnitOfWork unitOfWork)
     {
         _configuration = configuration;
         _invoiceRepo = invoiceRepo;
@@ -32,34 +34,73 @@ public class InvoiceRequestService : IInvoiceRequestService
         _customerService = customerService;
         _customerRepo = customerRepo;
         _paymentGateway = paymentGateway;
-
+        _snapshotService = snapshotService;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<InvoiceRequestCheckResultDto>> CreateInvoiceRequestTokenAsync(InvoiceRequestDto dto)
     {
         var result = new InvoiceRequestCheckResultDto();
 
-        if (!dto.IsChange)
-        {
-            // Kiểm tra user theo email
-            var existingUser = (await _customerRepo.GetAllAsync())
-                .FirstOrDefault(c => c.Email == dto.Email);
 
+            // Kiểm tra user theo email
+            var existingUser = await _customerRepo.GetByEmailAsync(dto.Email);
+
+            // Trường hợp 2: TÀI KHOẢN ĐÃ TỒN TẠI
             if (existingUser != null)
             {
-                // So sánh thông tin hiện tại với thông tin mới
-                if (existingUser.FullName != dto.FullName) result.ChangedFields.Add("FullName");
-                if (existingUser.Phone != dto.Phone) result.ChangedFields.Add("Phone");
-                if (existingUser.Address != dto.Address) result.ChangedFields.Add("Address");
-
-                if (result.ChangedFields.Any())
+                // Nếu tồn tại nhưng chưa có mật khẩu -> yêu cầu bổ sung mật khẩu
+                if (string.IsNullOrEmpty(existingUser.PasswordHash))
                 {
-                    result.HasChanges = true;
-                    return await  Result<InvoiceRequestCheckResultDto>.SuccessAsync(result,
-                        "Dữ liệu của bạn đã thay đổi. Bạn có muốn cập nhật dữ liệu này không?");
+                    if (!dto.IsRegister || string.IsNullOrEmpty(dto.Password))
+                    {
+                        return await Result<InvoiceRequestCheckResultDto>.SuccessAsync(
+                            new InvoiceRequestCheckResultDto
+                            {
+                                isPassword = true,
+                                Token = ""
+                            },
+                            "Tài khoản của bạn chưa hoàn tất đăng ký. Vui lòng nhập mật khẩu để tiếp tục."
+                        );
+                    }
+
+                    // Người dùng gửi password để hoàn tất đăng ký
+                    existingUser.PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password);
+                    await _customerRepo.UpdateAsync(existingUser);
                 }
+
+                // Nếu tài khoản đã có password → cho phép tiếp tục
             }
-        }
+
+
+            // Trường hợp 1 2: TÀI KHOẢN CHƯA TỒN TẠI 
+            else
+            {
+                if (!dto.IsRegister || string.IsNullOrEmpty(dto.Password))
+                {
+                    return await Result<InvoiceRequestCheckResultDto>.SuccessAsync(
+                        new InvoiceRequestCheckResultDto
+                        {
+                            isPassword = true,
+                            Token = ""
+                        },
+                        "Email chưa có tài khoản. Vui lòng nhập mật khẩu để tạo tài khoản mới."
+                    );
+                }
+
+                // Tạo mới user
+                var newUser = new Customer
+                {
+                    FullName = dto.FullName,
+                    Email = dto.Email,
+                    Phone = dto.Phone,
+                    Address = dto.Address,
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password)
+                };
+
+                await _customerRepo.AddAsync(newUser);
+            }
+
 
         // Tạo claims để lưu tất cả thông tin
         var claims = new[]
@@ -96,7 +137,8 @@ public class InvoiceRequestService : IInvoiceRequestService
         );
         var tokenStr = new JwtSecurityTokenHandler().WriteToken(token);
         result.Token = tokenStr;
-        result.HasChanges = false;
+        result.isPassword = false;
+
         //  Gửi email kèm link xác nhận
         var confirmLink = $"{_frontendUrl}?token={tokenStr}";
         var subject = "Xác nhận hóa đơn của bạn";
@@ -192,6 +234,7 @@ public class InvoiceRequestService : IInvoiceRequestService
                 BlockchainTxHash = "PENDING" // giá trị tạm
 
             };
+            // await _snapshotService.SaveSnapshotAsync(invoice);
 
             await _invoiceRepo.AddInvoiceAsync(invoice);
             
@@ -265,6 +308,47 @@ public class InvoiceRequestService : IInvoiceRequestService
         return await Result<bool>.SuccessAsync(true, "Đã xử lý bạn cần check email");
     }
 
+    
+    public async Task<Result<bool>> ReportInvoiceAsync(Guid invoiceId)
+    {
+        try
+        {
+            var invoice = await _invoiceRepo.GetInvoiceByIdAsync(invoiceId);
+            if (invoice == null)
+                return await Result<bool>.FailureAsync("Hóa đơn không tồn tại.");
+
+            if (invoice.IsReported)
+                return await Result<bool>.FailureAsync("Hóa đơn này đã được báo cáo trước đó.");
+
+            // Đánh dấu đã báo cáo
+            invoice.IsReported = true;
+            invoice.ReportedAt = DateTime.UtcNow;
+            await _invoiceRepo.UpdateInvoiceAsync(invoice);
+            await _unitOfWork.CommitAsync();
+
+            // Gửi email cho Admin
+            var adminEmail = _configuration["Admin:Email"];
+            if (!string.IsNullOrWhiteSpace(adminEmail))
+            {
+                var subject = $"[Invoice Alert] Hóa đơn {invoice.Id} có dấu hiệu bị thay đổi";
+                var body = $@"
+                Hóa đơn {invoice.Id} do khách hàng {invoice.CustemerId} đã được phát hiện có thể bị thay đổi dữ liệu.<br/>
+                Vui lòng kiểm tra và xử lý kịp thời.<br/>
+                <b>Thời gian phát hiện:</b> {invoice.TamperedDetectedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")}
+            ";
+                await _emailService.SendEmailAsync(adminEmail, subject, body);
+            }
+
+            return await Result<bool>.SuccessAsync(true, "Báo cáo đã được gửi cho Admin.");
+        }
+        catch (Exception ex)
+        {
+            await _unitOfWork.RollbackAsync();
+            return await Result<bool>.FailureAsync($"Lỗi khi báo cáo hóa đơn: {ex.Message}");
+        }
+    }
+
+    
     private string ComputeHash(Invoice invoice)
     {
         using var sha = System.Security.Cryptography.SHA256.Create();

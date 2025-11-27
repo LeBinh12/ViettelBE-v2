@@ -13,6 +13,7 @@ namespace Application.Interfaces
     {
         Task<IResult<IEnumerable<ServicePackageResponse>>> GetAllAsync();
         Task<IResult<ServicePackageResponse>> GetByIdAsync(Guid id);
+        Task<IResult<IEnumerable<ServicePackageResponse>>> SearchAsync(string? keyword);
         Task<IResult<ServicePackageResponse>> CreateAsync(ServicePackageRequest request);
         Task<IResult<ServicePackageResponse>> UpdateAsync(ServicePackageUpdateRequest request);
         Task<IResult<bool>> DeleteAsync(Guid id);

@@ -24,5 +24,7 @@ namespace Domain.Entities
         [MaxLength(255, ErrorMessage = "️ Địa chỉ không được vượt quá 255 ký tự.")]
         public string? Address { get; set; }
         
+        public string? PasswordHash { get; set; }
+        
     }
 }

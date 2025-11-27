@@ -8,4 +8,5 @@ public interface IInvoiceRequestService
     Task<Result<InvoiceRequestCheckResultDto>> CreateInvoiceRequestTokenAsync(InvoiceRequestDto dto);
     Task<Result<string>> ConfirmInvoiceAsync(ConfirmInvoiceRequestDto dto);
     Task<Result<bool>> InvoiceCheckHistoryRequestTokenAsync(InvoicecCheckHistoryRequestDto dto);
+    Task<Result<bool>> ReportInvoiceAsync(Guid invoiceId);
 }

@@ -1,6 +1,7 @@
 ﻿using Application.DTOs;
 using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Share;
 
 namespace WebAPI.Controllers
 {
@@ -14,6 +15,22 @@ namespace WebAPI.Controllers
         {
             _service = service;
         }
+        
+        [HttpPost("login-magic")]
+        public async Task<ActionResult<Result<string>>> LoginMagic([FromBody] EmailLoginRequest request)
+        {
+            var result = await _service.LoginByEmailMagicLinkAsync(request.Email);
+           return StatusCode(result.Code, result);
+        }
+        
+        [HttpPost("login")]
+        public async Task<ActionResult<Result<string>>> Login([FromBody] EmailPasswordLoginRequest request)
+        {
+            var result = await _service.LoginByEmailPasswordAsync(request.Email, request.Password);
+            return StatusCode(result.Code, result);
+
+        }
+
 
         [HttpGet("get-all")]
         public async Task<IActionResult> GetAll()

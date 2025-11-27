@@ -1,14 +1,20 @@
 {
   "version": 2,
-  "dgSpecHash": "tKpMiAXgvRg=",
+  "dgSpecHash": "nsELaykrjLo=",
   "success": true,
   "projectFilePath": "E:\\Cá nhân\\BTLWeb\\BEViettel\\WebAPI\\WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\adraffy.ensnormalize\\0.1.5\\adraffy.ensnormalize.0.1.5.nupkg.sha512",
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\bouncycastle.cryptography\\2.5.1\\bouncycastle.cryptography.2.5.1.nupkg.sha512",
+    "C:\\Users\\PHUOC BINH\\.nuget\\packages\\closedxml\\0.105.0\\closedxml.0.105.0.nupkg.sha512",
+    "C:\\Users\\PHUOC BINH\\.nuget\\packages\\closedxml.parser\\2.0.0\\closedxml.parser.2.0.0.nupkg.sha512",
+    "C:\\Users\\PHUOC BINH\\.nuget\\packages\\closedxml_excel\\1.0.0\\closedxml_excel.1.0.0.nupkg.sha512",
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
+    "C:\\Users\\PHUOC BINH\\.nuget\\packages\\documentformat.openxml\\3.1.1\\documentformat.openxml.3.1.1.nupkg.sha512",
+    "C:\\Users\\PHUOC BINH\\.nuget\\packages\\documentformat.openxml.framework\\3.1.1\\documentformat.openxml.framework.3.1.1.nupkg.sha512",
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\entityframework\\6.1.0\\entityframework.6.1.0.nupkg.sha512",
+    "C:\\Users\\PHUOC BINH\\.nuget\\packages\\excelnumberformat\\1.1.0\\excelnumberformat.1.1.0.nupkg.sha512",
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\hangfire\\1.8.22\\hangfire.1.8.22.nupkg.sha512",
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\hangfire.aspnetcore\\1.8.22\\hangfire.aspnetcore.1.8.22.nupkg.sha512",
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\hangfire.core\\1.8.22\\hangfire.core.1.8.22.nupkg.sha512",
@@ -127,6 +133,8 @@
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\npgsql\\8.0.6\\npgsql.8.0.6.nupkg.sha512",
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\8.0.11\\npgsql.entityframeworkcore.postgresql.8.0.11.nupkg.sha512",
+    "C:\\Users\\PHUOC BINH\\.nuget\\packages\\rbush.signed\\4.0.0\\rbush.signed.4.0.0.nupkg.sha512",
+    "C:\\Users\\PHUOC BINH\\.nuget\\packages\\sixlabors.fonts\\1.0.0\\sixlabors.fonts.1.0.0.nupkg.sha512",
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\swashbuckle.aspnetcore\\6.6.2\\swashbuckle.aspnetcore.6.6.2.nupkg.sha512",
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.6.2\\swashbuckle.aspnetcore.swagger.6.6.2.nupkg.sha512",
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.6.2\\swashbuckle.aspnetcore.swaggergen.6.6.2.nupkg.sha512",
@@ -147,6 +155,7 @@
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\system.globalization\\4.3.0\\system.globalization.4.3.0.nupkg.sha512",
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.14.0\\system.identitymodel.tokens.jwt.8.14.0.nupkg.sha512",
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\system.io\\4.3.0\\system.io.4.3.0.nupkg.sha512",
+    "C:\\Users\\PHUOC BINH\\.nuget\\packages\\system.io.packaging\\8.0.1\\system.io.packaging.8.0.1.nupkg.sha512",
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\system.io.pipelines\\8.0.0\\system.io.pipelines.8.0.0.nupkg.sha512",
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\system.memory\\4.6.0\\system.memory.4.6.0.nupkg.sha512",
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\system.numerics.vectors\\4.6.0\\system.numerics.vectors.4.6.0.nupkg.sha512",
@@ -177,6 +186,16 @@
     "C:\\Users\\PHUOC BINH\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.20\\microsoft.netcore.app.host.win-x64.8.0.20.nupkg.sha512"
   ],
   "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'ClosedXML_Excel 1.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "libraryId": "ClosedXML_Excel",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",

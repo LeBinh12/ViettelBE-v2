@@ -41,4 +41,17 @@ namespace Application.DTOs
             public string Message { get; set; }
         }
     }
+    
+    // DTO request cho Magic Link
+    public class EmailLoginRequest
+    {
+        public string Email { get; set; } = null!;
+    }
+
+    // DTO request cho Email/Password
+    public class EmailPasswordLoginRequest
+    {
+        public string Email { get; set; } = null!;
+        public string Password { get; set; } = null!;
+    }
 }

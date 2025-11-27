@@ -99,6 +99,9 @@ namespace Infrastructure.src.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("text");
+
                     b.Property<string>("Phone")
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)");
@@ -145,6 +148,12 @@ namespace Infrastructure.src.Infrastructure.Migrations
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<bool>("IsReported")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsTampered")
+                        .HasColumnType("boolean");
+
                     b.Property<DateTime>("LastModified")
                         .HasColumnType("timestamp with time zone");
 
@@ -154,9 +163,15 @@ namespace Infrastructure.src.Infrastructure.Migrations
                     b.Property<Guid>("PackageId")
                         .HasColumnType("uuid");
 
+                    b.Property<DateTime?>("ReportedAt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<DateTime?>("TamperedDetectedAt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")

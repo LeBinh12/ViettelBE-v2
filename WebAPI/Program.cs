@@ -61,12 +61,15 @@ builder.Services.AddControllers()
             System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
     });
 
+builder.Services.AddScoped<InvoiceSnapshotService>();
+
 builder.Services.AddScoped<IUserService, UserAccountService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 
+builder.Services.AddScoped<IGeminiService, GeminiService>();
 builder.Services.AddScoped<IUserService, UserAccountService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IInvoiceService, InvoiceService>();
@@ -79,6 +82,7 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IServicePackageService, ServicePackageService>();
 builder.Services.AddScoped<IServicePackageRepository, ServicePackageRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddHttpClient<IGeminiService, GeminiService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

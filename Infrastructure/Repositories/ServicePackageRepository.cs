@@ -21,6 +21,20 @@ namespace Infrastructure.Repositories
                 .Where(p => !p.isDeleted)
                 .ToListAsync();
         }
+        
+        public async Task<IEnumerable<ServicePackage>> SearchAsync(string? keyword)
+        {
+            keyword = keyword?.Trim().ToLower();
+
+            return await _context.ServicePackages
+                .Include(p => p.Category)
+                .Where(p => !p.isDeleted &&
+                            (string.IsNullOrEmpty(keyword) ||
+                             p.PackageName.ToLower().Contains(keyword) ||
+                             p.Description.ToLower().Contains(keyword)))
+                .ToListAsync();
+        }
+
 
         public async Task<ServicePackage?> GetByIdAsync(Guid id)
         {

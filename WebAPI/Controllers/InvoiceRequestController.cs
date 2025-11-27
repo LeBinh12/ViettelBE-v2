@@ -35,4 +35,12 @@ public class InvoiceRequestController : ControllerBase
         var result = await _service.InvoiceCheckHistoryRequestTokenAsync(dto);
         return StatusCode(result.Code, result);
     }
+    
+    [HttpPost("report/{invoiceId}")]
+    public async Task<IActionResult> ReportInvoice(Guid invoiceId)
+    {
+        var result = await _service.ReportInvoiceAsync(invoiceId);
+        return StatusCode(result.Code, result);
+    }
+
 }

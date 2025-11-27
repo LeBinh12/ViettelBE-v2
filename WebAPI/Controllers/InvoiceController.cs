@@ -58,5 +58,37 @@ namespace WebAPI.Controllers
             var result = await _invoiceService.GetInvoicesByCustomerAsync(token);
             return StatusCode(result.Code, result);
         }
+        
+        [HttpGet("get-by-customer-id/{customerId}")]
+        public async Task<IActionResult> GetByCustomerInvoice(Guid customerId)
+        {
+            var result = await _invoiceService.GetInvoicesByCustomerIdAsync(customerId);
+            return StatusCode(result.Code, result);
+        }
+        
+        [HttpPost("backup/{invoiceId}")]
+        public async Task<IActionResult> BackupInvoice(Guid invoiceId)
+        {
+            var result = await _invoiceService.BackupInvoiceAsync(invoiceId);
+            return StatusCode(result.Code, result);
+        }
+        
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAllInvoices([FromQuery] InvoiceFilterDto? filter)
+        {
+            var result = await _invoiceService.GetAllInvoicesAsync(filter);
+            return StatusCode(result.Code, result);
+        }
+        
+        [HttpGet("export/{invoiceId}")]
+        public async Task<IActionResult> ExportInvoice(Guid invoiceId)
+        {
+            var result = await _invoiceService.ExportInvoiceToExcelAsync(invoiceId);
+            if (!result.Succeeded)
+                return BadRequest(result.Message);
+
+            return File(result.Data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                $"HoaDon_{invoiceId}.xlsx");
+        }
     }
 }

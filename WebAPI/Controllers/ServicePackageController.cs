@@ -21,6 +21,14 @@ namespace WebAPI.Controllers
             var result = await _service.GetAllAsync();
             return StatusCode(result.Code, result);
         }
+        
+        [HttpGet("search")]
+        public async Task<IActionResult> Search([FromQuery] string? keyword)
+        {
+            var result = await _service.SearchAsync(keyword);
+            return StatusCode(result.Code, result);
+        }
+
 
         [HttpGet("get-by-id/{id}")]
         public async Task<IActionResult> GetById(Guid id)

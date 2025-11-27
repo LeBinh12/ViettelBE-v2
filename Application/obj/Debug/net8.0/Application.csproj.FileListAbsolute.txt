@@ -118,3 +118,15 @@ E:\Cá nhân\BTLWeb\BEViettel\Application\bin\Debug\net8.0\Nethereum.Util.dll
 E:\Cá nhân\BTLWeb\BEViettel\Application\bin\Debug\net8.0\Nethereum.Util.Rest.dll
 E:\Cá nhân\BTLWeb\BEViettel\Application\bin\Debug\net8.0\Nethereum.Web3.dll
 E:\Cá nhân\BTLWeb\BEViettel\Application\bin\Debug\net8.0\Newtonsoft.Json.dll
+E:\Cá nhân\BTLWeb\BEViettel\Application\bin\Debug\net8.0\ClosedXML.dll
+E:\Cá nhân\BTLWeb\BEViettel\Application\bin\Debug\net8.0\ClosedXML.Parser.dll
+E:\Cá nhân\BTLWeb\BEViettel\Application\bin\Debug\net8.0\Spire.Common.dll
+E:\Cá nhân\BTLWeb\BEViettel\Application\bin\Debug\net8.0\Spire.License.dll
+E:\Cá nhân\BTLWeb\BEViettel\Application\bin\Debug\net8.0\Spire.Pdf.dll
+E:\Cá nhân\BTLWeb\BEViettel\Application\bin\Debug\net8.0\Spire.XLS.dll
+E:\Cá nhân\BTLWeb\BEViettel\Application\bin\Debug\net8.0\DocumentFormat.OpenXml.dll
+E:\Cá nhân\BTLWeb\BEViettel\Application\bin\Debug\net8.0\DocumentFormat.OpenXml.Framework.dll
+E:\Cá nhân\BTLWeb\BEViettel\Application\bin\Debug\net8.0\ExcelNumberFormat.dll
+E:\Cá nhân\BTLWeb\BEViettel\Application\bin\Debug\net8.0\RBush.dll
+E:\Cá nhân\BTLWeb\BEViettel\Application\bin\Debug\net8.0\SixLabors.Fonts.dll
+E:\Cá nhân\BTLWeb\BEViettel\Application\bin\Debug\net8.0\System.IO.Packaging.dll

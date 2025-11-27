@@ -23,7 +23,20 @@ namespace Domain.Entities
 
         public string BlockchainTxHash { get; set; }          
         public DateTime? BlockchainRecordedAt { get; set; }  
-
         
+        /// <summary>
+        ///     Lưu trạng thái cho Admin biết
+        /// </summary>
+        public bool IsTampered { get; set; } = false;
+        public DateTime? TamperedDetectedAt { get; set; }
+
+        /// <summary>
+        ///     Đánh dấu là hóa đơn đã được báo cáo
+        /// </summary>
+        public bool IsReported { get; set; } = false;
+        public DateTime? ReportedAt { get; set; }
+
+
+            
     }
 }

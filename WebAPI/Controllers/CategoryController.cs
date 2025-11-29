@@ -44,7 +44,7 @@ namespace WebAPI.Controllers
             return StatusCode(result.Code, result);
         }
 
-        [HttpDelete("delete/{id:guid}")]
+        [HttpPost("delete/{id:guid}")]
         public async Task<ActionResult<IResult<bool>>> Delete(Guid id)
         {
             var result = await _categoryService.DeleteAsync(id);

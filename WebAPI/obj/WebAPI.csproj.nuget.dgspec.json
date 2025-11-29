@@ -69,6 +69,10 @@
               "target": "Package",
               "version": "[1.0.0, )"
             },
+            "Hangfire.Core": {
+              "target": "Package",
+              "version": "[1.8.22, )"
+            },
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
               "version": "[8.14.0, )"

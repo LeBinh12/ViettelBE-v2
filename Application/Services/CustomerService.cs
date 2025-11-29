@@ -142,7 +142,7 @@ namespace Application.Services
 
             return await Result<string>.SuccessAsync(tokenStr, "Đăng nhập thành công.");
         }
-        
+
         public async Task<Result<CustomerDTO.CustomerResponseDto>> GetByIdAsync(Guid id)
         {
             var customer = await _repo.GetByIdAsync(id);

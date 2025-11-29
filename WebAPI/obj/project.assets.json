@@ -3166,6 +3166,7 @@
           "ClosedXML": "0.105.0",
           "ClosedXML_Excel": "1.0.0",
           "Domain": "1.0.0",
+          "Hangfire.Core": "1.8.22",
           "Microsoft.IdentityModel.Tokens": "8.14.0",
           "Nethereum.Web3": "5.0.0",
           "Share": "1.0.0",

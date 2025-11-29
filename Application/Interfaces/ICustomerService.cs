@@ -17,7 +17,7 @@ namespace Application.Interfaces
         Task<Result<string>> LoginByEmailMagicLinkAsync(string email);
         Task<Result<CustomerDTO.CustomerResponseDto>> GetByIdAsync(Guid id);
         Task<Result<string>> LoginByEmailPasswordAsync(string email, string password);
-
+        
     }
 }
 

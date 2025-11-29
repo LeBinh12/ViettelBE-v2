@@ -4,11 +4,6 @@ using Domain.Abstractions;
 using Domain.Entities;
 using Share;
 using Share.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Services
 {
@@ -31,14 +26,14 @@ namespace Application.Services
                 Description = c.Description ?? " "
             });
 
-            return Result<IEnumerable<CategoryResponse>>.Success(response, "Lấy danh sách danh mục thành công");
+            return await Result<IEnumerable<CategoryResponse>>.SuccessAsync(response, "Lấy danh sách danh mục thành công");
         }
 
         public async Task<IResult<CategoryResponse>> GetByIdAsync(Guid id)
         {
             var category = await _repository.GetByIdAsync(id);
             if (category == null)
-                return Result<CategoryResponse>.Failure("Không tìm thấy danh mục");
+                return await Result<CategoryResponse>.FailureAsync("Không tìm thấy danh mục");
 
             var response = new CategoryResponse
             {
@@ -47,7 +42,7 @@ namespace Application.Services
                 Description = category.Description ?? " "
             };
 
-            return Result<CategoryResponse>.Success(response, "Lấy chi tiết danh mục thành công");
+            return await Result<CategoryResponse>.SuccessAsync(response, "Lấy chi tiết danh mục thành công");
         }
 
         public async Task<IResult<CategoryResponse>> CreateAsync(CategoryRequest request)
@@ -55,7 +50,8 @@ namespace Application.Services
             var category = new Category
             {
                 Name = request.Name,
-                Description = request.Description
+                Description = request.Description,
+                UpdatedAt = DateTime.UtcNow
             };
 
             await _repository.AddAsync(category);
@@ -67,7 +63,7 @@ namespace Application.Services
                 Description = category.Description ?? " "
             };
 
-            return Result<CategoryResponse>.Success(response, "Tạo danh mục thành công");
+            return await Result<CategoryResponse>.SuccessAsync(response, "Tạo danh mục thành công");
         }
 
         public async Task<IResult<CategoryResponse>> UpdateAsync(CategoryUpdateRequest request)
@@ -89,17 +85,17 @@ namespace Application.Services
                 Description = category.Description ?? " "
             };
 
-            return Result<CategoryResponse>.Success(response, "Cập nhật danh mục thành công");
+            return await Result<CategoryResponse>.SuccessAsync(response, "Cập nhật danh mục thành công");
         }
 
         public async Task<IResult<bool>> DeleteAsync(Guid id)
         {
             var category = await _repository.GetByIdAsync(id);
             if (category == null)
-                return Result<bool>.Failure("Không tìm thấy danh mục");
+                return await Result<bool>.FailureAsync("Không tìm thấy danh mục");
 
             await _repository.DeleteAsync(category);
-            return Result<bool>.Success(true, "Xóa danh mục thành công");
+            return await Result<bool>.SuccessAsync(true, "Xóa danh mục thành công");
         }
 
      

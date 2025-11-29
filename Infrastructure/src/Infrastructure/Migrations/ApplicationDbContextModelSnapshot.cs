@@ -58,7 +58,8 @@ namespace Infrastructure.src.Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("CreateDate");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -68,7 +69,12 @@ namespace Infrastructure.src.Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("UpdateDate");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("boolean")
+                        .HasColumnName("IsDelete");
 
                     b.HasKey("Id");
 

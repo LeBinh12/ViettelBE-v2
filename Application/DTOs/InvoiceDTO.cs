@@ -91,3 +91,11 @@ public class InvoiceResponseFilterDto
     public DateTime CreatedAt { get; set; }
 
 }
+
+
+public class DailyInvoiceSummaryDto
+{
+    public DateTime Date { get; set; }
+    public int TotalInvoices { get; set; }
+    public decimal TotalAmount { get; set; }
+}

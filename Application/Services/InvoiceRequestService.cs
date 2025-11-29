@@ -7,6 +7,7 @@ using Application.Services;
 using Domain.Abstractions;
 using Domain.Entities;
 using Domain.Enums;
+using Hangfire;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Share;
@@ -149,7 +150,9 @@ public class InvoiceRequestService : IInvoiceRequestService
         <p><a href='{confirmLink}' style='padding:10px 20px; background-color:#4CAF50; color:white; text-decoration:none;'>Xác nhận hóa đơn</a></p>
         <p>Nếu bạn không yêu cầu, vui lòng bỏ qua email này.</p>
     ";
-        await _emailService.SendEmailAsync(dto.Email, subject, html);
+        BackgroundJob.Enqueue<IEmailService>(x => x.SendEmailAsync(dto.Email, subject, html));
+
+        // await _emailService.SendEmailAsync(dto.Email, subject, html);
         
         return await Result<InvoiceRequestCheckResultDto>.SuccessAsync(result, "Đã xử lý bạn cần check email");
     }
@@ -303,7 +306,9 @@ public class InvoiceRequestService : IInvoiceRequestService
         <p>Nếu bạn không yêu cầu, vui lòng bỏ qua email này.</p>
     ";
 
-        await _emailService.SendEmailAsync(dto.Email, subject, html);
+        BackgroundJob.Enqueue<IEmailService>(x => x.SendEmailAsync(dto.Email, subject, html));
+
+        // await _emailService.SendEmailAsync(dto.Email, subject, html);
         
         return await Result<bool>.SuccessAsync(true, "Đã xử lý bạn cần check email");
     }
@@ -336,7 +341,9 @@ public class InvoiceRequestService : IInvoiceRequestService
                 Vui lòng kiểm tra và xử lý kịp thời.<br/>
                 <b>Thời gian phát hiện:</b> {invoice.TamperedDetectedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")}
             ";
-                await _emailService.SendEmailAsync(adminEmail, subject, body);
+                BackgroundJob.Enqueue<IEmailService>(x => x.SendEmailAsync(adminEmail, subject, body));
+
+                // await _emailService.SendEmailAsync(adminEmail, subject, body);
             }
 
             return await Result<bool>.SuccessAsync(true, "Báo cáo đã được gửi cho Admin.");

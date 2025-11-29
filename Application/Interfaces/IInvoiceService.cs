@@ -17,4 +17,5 @@ public interface IInvoiceService
     Task<Result<List<InvoiceResponseFilterDto>>> GetAllInvoicesAsync(InvoiceFilterDto? filter = null);
     
     Task<Result<byte[]>> ExportInvoiceToExcelAsync(Guid invoiceId);
+
 }

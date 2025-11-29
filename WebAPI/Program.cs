@@ -69,6 +69,9 @@ builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 
+builder.Services.AddScoped<IStatisticalService, StatisticalService>();
+builder.Services.AddScoped<IStatisticalExportService, StatisticalExportService>();
+
 builder.Services.AddScoped<IGeminiService, GeminiService>();
 builder.Services.AddScoped<IUserService, UserAccountService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -89,7 +92,12 @@ builder.Services.AddSwaggerGen();
 
 // Đăng ký DbContext với PostgreSQL
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        npgsqlOptions => npgsqlOptions.MigrationsAssembly("Infrastructure") // <-- thêm dòng này
+    )
+);
+
 
 // Add Hangfire
 builder.Services.AddHangfire(config => 

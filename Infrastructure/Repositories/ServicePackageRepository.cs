@@ -52,13 +52,14 @@ namespace Infrastructure.Repositories
         public async Task UpdateAsync(ServicePackage servicePackage)
         {
             _context.ServicePackages.Update(servicePackage);
+            servicePackage.UpdatedAt = DateTime.UtcNow;
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(ServicePackage servicePackage)
         {
             servicePackage.isDeleted = true;
-            _context.ServicePackages.Update(servicePackage);
+            servicePackage.UpdatedAt = DateTime.UtcNow;
             await _context.SaveChangesAsync();
         }
         

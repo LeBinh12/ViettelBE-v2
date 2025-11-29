@@ -439,6 +439,38 @@ namespace Application.Services
             }
         }
 
+        
+        public async Task<Result<DailyInvoiceSummaryDto>> GetDailyInvoiceSummaryAsync(DateTime? date = null)
+        {
+            try
+            {
+                // Nếu không truyền ngày thì lấy ngày hiện tại
+                var targetDate = date?.Date ?? DateTime.UtcNow.Date;
+
+                // Lấy tất cả hóa đơn trong ngày
+                var invoices = await _invoiceRepo.GetAllInvoicesAsync();
+                var dailyInvoices = invoices.Where(i =>
+                    i.CreatedAt.Date == targetDate
+                ).ToList();
+
+                var totalAmount = dailyInvoices.Sum(i => i.Amount ?? 0);
+                var totalInvoices = dailyInvoices.Count;
+
+                var summary = new DailyInvoiceSummaryDto
+                {
+                    Date = targetDate,
+                    TotalInvoices = totalInvoices,
+                    TotalAmount = totalAmount
+                };
+
+                return await Result<DailyInvoiceSummaryDto>.SuccessAsync(summary, "Lấy tống kê hoóa đơn thành công!");
+            }
+            catch (Exception ex)
+            {
+                return await Result<DailyInvoiceSummaryDto>.FailureAsync($"Lỗi khi thống kê hóa đơn: {ex.Message}");
+            }
+        }
+
 
         /// <summary>
         ///  XUất hóa đơn

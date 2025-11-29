@@ -80,7 +80,9 @@ namespace Application.Services
                 Price = request.Price,
                 Description = request.Description,
                 DurationMonths = request.DurationMonths,
-                CategoryId = request.CategoryId
+                CategoryId = request.CategoryId,
+                UpdatedAt = DateTime.Now,
+                CreatedAt = DateTime.Now,
             };
 
             await _repository.AddAsync(entity);

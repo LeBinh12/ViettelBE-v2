@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.src.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251124064453_Update_invoice")]
-    partial class Update_invoice
+    [Migration("20251129174340_AddBaseEntityColumns")]
+    partial class AddBaseEntityColumns
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,7 +61,8 @@ namespace Infrastructure.src.Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("CreateDate");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -71,7 +72,12 @@ namespace Infrastructure.src.Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("UpdateDate");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("boolean")
+                        .HasColumnName("IsDelete");
 
                     b.HasKey("Id");
 
@@ -101,6 +107,9 @@ namespace Infrastructure.src.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("text");
 
                     b.Property<string>("Phone")
                         .HasMaxLength(10)
@@ -148,6 +157,9 @@ namespace Infrastructure.src.Infrastructure.Migrations
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<bool>("IsReported")
+                        .HasColumnType("boolean");
+
                     b.Property<bool>("IsTampered")
                         .HasColumnType("boolean");
 
@@ -159,6 +171,9 @@ namespace Infrastructure.src.Infrastructure.Migrations
 
                     b.Property<Guid>("PackageId")
                         .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("ReportedAt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Status")
                         .IsRequired()
